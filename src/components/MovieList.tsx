@@ -23,7 +23,7 @@ const MovieList: React.FC = () => {
 
   return (
     <div className="movie-list-container">
-      <h2>지금 뜨는 콘텐츠</h2>
+      <h2>지금 뜨는</h2>
       <div className="slider-buttons">
         <button className="slide-button left" onClick={slideLeft}>
           &lt;

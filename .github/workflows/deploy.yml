@@ -1,4 +1,4 @@
-name: Deploy WSD
+name: Deploy
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build Docs
+      - name: Build
         run: npm run build
 
       - name: Deploy to gh-pages

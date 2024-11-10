@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { tmdb } from "../utils/URL";
 import { Movie } from "../types/Movie";
 
-const useFetchMovies = () => {
+const useFetchMovies = (category: string) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -11,7 +11,22 @@ const useFetchMovies = () => {
     const loadMovies = async () => {
       try {
         setLoading(true);
-        const data = await tmdb.fetchMovies();
+        let data;
+
+        switch (category) {
+          case "nowPlaying":
+            data = await tmdb.getNowPlaying();
+            break;
+          case "top_rated":
+            data = await tmdb.getTop_Rated();
+            break;
+          case "upcoming":
+            data = await tmdb.getUpcoming();
+            break;
+          default:
+            data = await tmdb.fetchMovies();
+        }
+
         setMovies(data);
       } catch (err) {
         setError("Failed to fetch movies");
@@ -20,7 +35,7 @@ const useFetchMovies = () => {
       }
     };
     loadMovies();
-  }, []);
+  }, [category]);
 
   return { movies, loading, error };
 };

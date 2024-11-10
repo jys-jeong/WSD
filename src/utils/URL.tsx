@@ -9,51 +9,51 @@ export class TMDB {
       const response = await axios.get(`${BASE_URL}/movie/popular`, {
         params: { api_key: API_KEY, language: "ko-KR" },
       });
-      console.log(response.data);
       return response.data.results;
     } catch (error) {
       console.error("Failed to fetch movies:", error);
       return [];
     }
   };
-  getNowPlaying = async (apiKey: string, page: number = 1) => {
+
+  getNowPlaying = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/movie/now_playing`, {
-        params: {
-          api_key: API_KEY,
-        },
+        params: { api_key: API_KEY, language: "ko-KR" },
       });
       return response.data.results;
     } catch (error) {
-      console.error("Failed to fetch movies:", error);
+      console.error("Failed to fetch now playing movies:", error);
       return [];
     }
   };
-  getPopular = async (apiKey: string, page: number = 1) => {
+
+  getTop_Rated = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/movie/now_playing`, {
-        params: {
-          api_key: API_KEY,
-        },
+      const response = await axios.get(`${BASE_URL}/movie/top_rated`, {
+        params: { api_key: API_KEY, language: "ko-KR", page: 2 },
       });
       return response.data.results;
     } catch (error) {
-      console.error("Failed to fetch movies:", error);
+      console.error("Failed to fetch popular movies:", error);
       return [];
     }
   };
-  getAction = async (apiKey: string, page: number = 1) => {
+
+  getUpcoming = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/movie/now_playing`, {
-        params: {
-          api_key: API_KEY,
-        },
-      });
+      const response = await axios.get(
+        `${BASE_URL}/discover/movie?include_adult=false&include_video=false&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte={min_date}&release_date.lte={max_date}'`,
+        {
+          params: { api_key: API_KEY, language: "ko-KR" },
+        }
+      );
       return response.data.results;
     } catch (error) {
-      console.error("Failed to fetch movies:", error);
+      console.error("Failed to fetch action movies:", error);
       return [];
     }
   };
 }
+
 export const tmdb = new TMDB();

@@ -2,47 +2,56 @@ import React, { useRef } from "react";
 import useFetchMovies from "../hooks/useFetchMovies";
 import "../assets/styles/MovieList.css";
 
-const MovieList: React.FC = () => {
-  const { movies, loading, error } = useFetchMovies();
+interface MovieListProps {
+  category: string;
+  title: string;
+}
+
+const MovieList: React.FC<MovieListProps> = ({ category, title }) => {
+  const { movies, loading, error } = useFetchMovies(category);
   const sliderRef = useRef<HTMLDivElement>(null);
-
-  const slideLeft = () => {
+  const scrollLeft = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollLeft -= 300;
+      sliderRef.current.scrollBy({ left: -300, behavior: "smooth" });
     }
   };
 
-  const slideRight = () => {
+  const scrollRight = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollLeft += 300;
+      sliderRef.current.scrollBy({ left: 300, behavior: "smooth" });
     }
   };
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div className="movie-list-container">
-      <h2>지금 뜨는</h2>
-      <div className="slider-buttons">
-        <button className="slide-button left" onClick={slideLeft}>
-          &lt;
+      <h2>{title}</h2>
+      <div className="movie-slider-wrapper">
+        <button className="scroll-button left" onClick={scrollLeft}>
+          {"<"}
         </button>
-        <button className="slide-button right" onClick={slideRight}>
-          &gt;
+        <div className="movie-slider" ref={sliderRef}>
+          {movies.map((movie) => (
+            <div key={movie.id} className="movie-item">
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title}
+                className="movie-poster"
+              />
+              <div className="movie-overlay">
+                <h3 className="movie-title">{movie.title}</h3>
+                <p className="movie-rating">Rating: {movie.vote_average}</p>
+                <p className="movie-release-date">
+                  Release Date: {movie.release_date}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button className="scroll-button right" onClick={scrollRight}>
+          {">"}
         </button>
-      </div>
-      <div className="movie-slider" ref={sliderRef}>
-        {movies.map((movie) => (
-          <div key={movie.id} className="movie-item">
-            <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={movie.title}
-              className="movie-poster"
-            />
-            <h3 className="movie-title">{movie.title}</h3>
-          </div>
-        ))}
       </div>
     </div>
   );

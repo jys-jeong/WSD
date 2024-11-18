@@ -4,10 +4,10 @@ const API_KEY = "8767bdf177f7fc3c69a7cb214f80a52e";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 export class TMDB {
-  fetchMovies = async () => {
+  fetchMovies = async (page: number = 1) => {
     try {
       const response = await axios.get(`${BASE_URL}/movie/popular`, {
-        params: { api_key: API_KEY, language: "ko-KR" },
+        params: { api_key: API_KEY, language: "ko-KR", page: page },
       });
       return response.data.results;
     } catch (error) {

@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import useFetchMovies from "../hooks/useFetchMovies";
-import "../assets/styles/MovieList.css";
+import useFetchMovies from "../../hooks/useFetchMovies";
+import "../..//assets/styles/MovieList.css";
 
 interface MovieListProps {
   category: string;

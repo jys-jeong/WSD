@@ -1,6 +1,6 @@
 import React from "react";
-import MovieList from "../components/MovieList";
-import Banner from "../components/Banner";
+import MovieList from "../components/home/MovieList";
+import Banner from "../components/home/Banner";
 
 const Main: React.FC = () => {
   return (

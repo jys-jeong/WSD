@@ -1,6 +1,6 @@
 import React from "react";
-import useFetchBannerMovie from "../hooks/useFeetchBannerMovie";
-import "../assets/styles/Banner.css";
+import useFetchBannerMovie from "../../hooks/useFetchBannerMovie";
+import "../../assets/styles/Banner.css";
 
 const Banner: React.FC = () => {
   const { movie, loading, error } = useFetchBannerMovie();

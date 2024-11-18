@@ -1,0 +1,37 @@
+/* 영화 목록 컨테이너 */
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  background-color: #1c1c1c; /* 어두운 배경 */
+}
+
+/* 개별 영화 항목 */
+.movie-item {
+  text-align: center;
+  color: white;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* 영화 포스터 */
+.movie-item img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+/* 영화 제목 */
+.movie-item p {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 영화 항목 호버 효과 */
+.movie-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MovieList from "../components/popular/MovieList";
-import Pagination from "../components/popular/Pagination";
+
 import InfiniteMovieList from "../components/popular/InfiniteScroll";
 import { tmdb } from "../utils/URL";
 
@@ -29,7 +29,7 @@ const HomePage: React.FC = () => {
       <header>
         <h1>영화 목록</h1>
       </header>
-      <InfiniteMovieList /> {/* 현재 페이지 데이터 전달 */}
+      <MovieList /> {/* 현재 페이지 데이터 전달 */}
     </div>
   );
 };

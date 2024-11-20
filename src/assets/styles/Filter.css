@@ -1,0 +1,42 @@
+/* Filter.css */
+.filter-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 8px;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.filter-item label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.filter-item select {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #444;
+  color: white;
+}
+
+.filter-item select:focus {
+  border-color: #ff8c00;
+  outline: none;
+}
+
+.filter-item select option {
+  background-color: #333;
+  color: white;
+}
+
+.filter-container select {
+  width: 150px;
+}

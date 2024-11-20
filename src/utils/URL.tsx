@@ -4,6 +4,25 @@ const API_KEY = "8767bdf177f7fc3c69a7cb214f80a52e";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 export class TMDB {
+  filterMovies = async ({
+    page,
+    genre,
+    rating,
+    sortBy,
+    sortDirection,
+  }: any) => {
+    const response = await axios.get(`${BASE_URL}/discover/movie`, {
+      params: {
+        api_key: API_KEY,
+        page,
+        with_genres: genre || undefined,
+        "vote_average.gte": rating || undefined,
+        sort_by: `${sortBy}.${sortDirection}`,
+        language: "ko-KR",
+      },
+    });
+    return response.data;
+  };
   fetchMovies = async (page: number = 1) => {
     try {
       const response = await axios.get(`${BASE_URL}/movie/popular`, {

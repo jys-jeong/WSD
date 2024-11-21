@@ -1,0 +1,53 @@
+/* src/components/Header.css */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #141414;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.header__logo {
+  flex: 1;
+}
+
+.header__logoImage {
+  height: 40px;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: center;
+  flex: 2;
+}
+
+.header__navItem {
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 20px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.header__navItem:hover {
+  color: #e50914;
+}
+
+.header__profile {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header__profileImage {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}

@@ -23,6 +23,7 @@ const SignUp: React.FC = () => {
     }
 
     const success = await signUp(email, password);
+    console.log(success);
     if (!success) alert("회원가입 실패!");
   };
 

@@ -52,8 +52,10 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({
     // 기존 사용자 정보를 로컬스토리지에서 불러오기
     const users = JSON.parse(getFromStorage("users") || "[]");
     const user = users.find((user: { email: string }) => user.email === email);
+    console.log(user);
     if (user) {
       alert("회원이메일이 존재합니다.");
+      return false;
     } else {
       // 새로운 사용자 추가
       users.push(newUser);
@@ -62,9 +64,8 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({
       saveToStorage("users", JSON.stringify(users));
       saveToStorage("isAuthenticated", "true");
       setIsAuthenticated(true);
+      return true;
     }
-
-    return true;
   };
 
   // 로그아웃 함수

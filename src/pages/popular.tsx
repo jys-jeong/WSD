@@ -4,7 +4,7 @@ import MovieList from "../components/popular/MovieList";
 import InfiniteMovieList from "../components/popular/InfiniteScroll";
 import { tmdb } from "../utils/URL";
 
-const HomePage: React.FC = () => {
+const Popular: React.FC = () => {
   const [movies, setMovies] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0); // 총 페이지 수
@@ -34,4 +34,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default Popular;

@@ -1,13 +1,29 @@
 import React from "react";
-//import HomePage from "./pages/home";
-// import HomePage from "./pages/popular";
-import Homepage from "./pages/search";
-import Wishlist from "./pages/wishlist";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./components/Auth/AuthContext";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import SignInPage from "./pages/signin";
+import SignUpPage from "./pages/signup";
+import Main from "./pages/home";
+
 const App: React.FC = () => {
   return (
-    <div>
-      <Wishlist />
-    </div>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/signin" element={<SignInPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Main />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 };
 

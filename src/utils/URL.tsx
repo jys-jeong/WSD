@@ -1,6 +1,6 @@
 import axios from "axios";
-
-const API_KEY = "8767bdf177f7fc3c69a7cb214f80a52e";
+import { getFromStorage } from "./localstorage";
+const API_KEY = getFromStorage("TMDb-Key");
 const BASE_URL = "https://api.themoviedb.org/3";
 
 export class TMDB {

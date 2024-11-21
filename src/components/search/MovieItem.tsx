@@ -1,12 +1,12 @@
 import React from "react";
-
+import { saveToStorage, getFromStorage } from "../../utils/localstorage";
 interface MovieItemProps {
   movie: any;
 }
 
 // 로컬 스토리지에서 wishlist를 가져오는 함수
 const getWishlist = () => {
-  const wishlist = localStorage.getItem("wishlist");
+  const wishlist = getFromStorage("wishlist");
   return wishlist ? JSON.parse(wishlist) : [];
 };
 
@@ -16,7 +16,7 @@ const addToWishlist = (movie: any) => {
   // 이미 존재하지 않는 경우에만 추가
   if (!wishlist.some((item: any) => item.id === movie.id)) {
     wishlist.push(movie);
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    saveToStorage("wishlist", JSON.stringify(wishlist));
     alert(`${movie.title}가 찜 목록에 추가되었습니다!`);
   } else {
     alert(`${movie.title}는 이미 찜 목록에 있습니다.`);

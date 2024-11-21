@@ -71,7 +71,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({
   // 로그아웃 함수
   const signOut = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem("isAuthenticated");
+    removeFromStorage("isAuthenticated");
   };
 
   return (

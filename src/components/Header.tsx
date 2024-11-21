@@ -1,9 +1,17 @@
 // src/components/Header.tsx
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../assets/styles/Header.css"; // 스타일 파일 임포트
-
+import { removeFromStorage } from "../utils/localstorage";
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    removeFromStorage("TMDb-Key");
+    alert("로그아웃되었습니다.");
+    navigate("/signin"); // 로그아웃 후 로그인 페이지로 이동
+  };
+
   return (
     <header className="header">
       <div className="header__logo">
@@ -30,13 +38,23 @@ const Header: React.FC = () => {
         </Link>
       </nav>
       <div className="header__profile">
-        <Link to="/signin">
+        {/* 로그아웃 버튼 추가 */}
+        <button
+          onClick={handleSignOut}
+          className="header__profileButton"
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: 0,
+          }}
+        >
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Avatar_icon.png"
             alt="Profile"
             className="header__profileImage"
           />
-        </Link>
+        </button>
       </div>
     </header>
   );

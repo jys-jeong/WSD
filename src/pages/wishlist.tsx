@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
+import { saveToStorage, getFromStorage } from "../utils/localstorage";
 interface Movie {
   id: number;
   title: string;
@@ -11,7 +12,7 @@ const Wishlist: React.FC = () => {
 
   // 로컬 스토리지에서 wishlist 데이터를 가져옵니다.
   const getWishlist = () => {
-    const wishlist = localStorage.getItem("wishlist");
+    const wishlist = getFromStorage("wishlist");
     return wishlist ? JSON.parse(wishlist) : [];
   };
 
@@ -22,7 +23,7 @@ const Wishlist: React.FC = () => {
       (movie: Movie) => movie.id !== movieId
     );
     // 삭제된 후 새로운 wishlist를 로컬 스토리지에 저장합니다.
-    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+    saveToStorage("wishlist", JSON.stringify(updatedWishlist));
     // 상태 업데이트
     setWishlist(updatedWishlist);
   };

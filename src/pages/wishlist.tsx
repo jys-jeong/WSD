@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import Header from "../components/Header";
 interface Movie {
   id: number;
   title: string;
@@ -33,23 +33,26 @@ const Wishlist: React.FC = () => {
   }, []);
 
   return (
-    <div className="wishlist">
-      <h2>My Wishlist</h2>
-      <div className="wishlist-container">
-        {wishlist.length > 0 ? (
-          wishlist.map((movie) => (
-            <div key={movie.id} className="movie-item">
-              <img
-                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                alt={movie.title}
-                onClick={() => removeFromWishlist(movie.id)} // 이미지를 클릭하면 해당 영화를 삭제
-              />
-              <p>{movie.title}</p>
-            </div>
-          ))
-        ) : (
-          <p>찜한 영화가 없습니다.</p>
-        )}
+    <div>
+      <Header />
+      <div className="wishlist">
+        <h2>My Wishlist</h2>
+        <div className="wishlist-container">
+          {wishlist.length > 0 ? (
+            wishlist.map((movie) => (
+              <div key={movie.id} className="movie-item">
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  alt={movie.title}
+                  onClick={() => removeFromWishlist(movie.id)} // 이미지를 클릭하면 해당 영화를 삭제
+                />
+                <p>{movie.title}</p>
+              </div>
+            ))
+          ) : (
+            <p>찜한 영화가 없습니다.</p>
+          )}
+        </div>
       </div>
     </div>
   );

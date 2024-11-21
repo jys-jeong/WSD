@@ -3,7 +3,7 @@ import MovieList from "../components/popular/MovieList";
 
 import InfiniteMovieList from "../components/popular/InfiniteScroll";
 import { tmdb } from "../utils/URL";
-
+import Header from "../components/Header";
 const Popular: React.FC = () => {
   const [movies, setMovies] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,6 +26,7 @@ const Popular: React.FC = () => {
 
   return (
     <div>
+      <Header />
       <header>
         <h1>영화 목록</h1>
       </header>

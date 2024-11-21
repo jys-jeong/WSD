@@ -3,6 +3,7 @@ import FilterBar from "../components/search/Filter";
 import MovieList from "../components/search/MovieList";
 import "../assets/styles/Filter.css";
 import "../assets/styles/FilterList.css";
+import Header from "../components/Header";
 const SearchPage: React.FC = () => {
   const [genre, setGenre] = useState<string | null>(null);
   const [rating, setRating] = useState<number | null>(null);
@@ -11,6 +12,7 @@ const SearchPage: React.FC = () => {
 
   return (
     <div>
+      <Header />
       {/* 필터링 UI */}
       <FilterBar
         onGenreChange={setGenre}

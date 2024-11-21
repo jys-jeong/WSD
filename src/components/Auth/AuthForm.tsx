@@ -1,21 +1,13 @@
+// src/components/Auth/AuthForm.tsx
 import React from "react";
+// import "./AuthForm.css"; // 스타일링 추가 가능
 
 interface AuthFormProps {
-  title: string;
-  onSubmit: (e: React.FormEvent) => void;
   children: React.ReactNode;
 }
 
-const AuthForm: React.FC<AuthFormProps> = ({ title, onSubmit, children }) => {
-  return (
-    <form onSubmit={onSubmit} className="auth-form">
-      <h2>{title}</h2>
-      {children}
-      <button type="submit" className="submit-button">
-        {title}
-      </button>
-    </form>
-  );
+const AuthForm: React.FC<AuthFormProps> = ({ children }) => {
+  return <div className="auth-form-container">{children}</div>;
 };
 
 export default AuthForm;

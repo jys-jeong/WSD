@@ -1,7 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import useFetchMovies from "../../hooks/useFetchMovies";
 import "../..//assets/styles/MovieList.css";
-
+import { Movie } from "../../types/Movie";
+import { toggleWishlist } from "../../utils/toggleWishlist";
+import MovieItem from "../MovieItem";
 interface MovieListProps {
   category: string;
   title: string;
@@ -9,6 +11,7 @@ interface MovieListProps {
 
 const MovieList: React.FC<MovieListProps> = ({ category, title }) => {
   const { movies, loading, error } = useFetchMovies(category);
+  const [wishlist, setWishlist] = useState<Movie[]>([]);
   const sliderRef = useRef<HTMLDivElement>(null);
   const scrollLeft = () => {
     if (sliderRef.current) {
@@ -33,20 +36,11 @@ const MovieList: React.FC<MovieListProps> = ({ category, title }) => {
         </button>
         <div className="movie-slider" ref={sliderRef}>
           {movies.map((movie) => (
-            <div key={movie.id} className="movie-item">
-              <img
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-                className="movie-poster"
-              />
-              <div className="movie-overlay">
-                <h3 className="movie-title">{movie.title}</h3>
-                <p className="movie-rating">Rating: {movie.vote_average}</p>
-                <p className="movie-release-date">
-                  Release Date: {movie.release_date}
-                </p>
-              </div>
-            </div>
+            <MovieItem
+              key={movie.id}
+              movie={movie}
+              onToggleWishlist={(movie) => toggleWishlist(movie, setWishlist)}
+            />
           ))}
         </div>
         <button className="scroll-button right" onClick={scrollRight}>

@@ -4,6 +4,7 @@ import {
   getFromStorage,
   removeFromStorage,
 } from "../../utils/localstorage";
+import { isValidEmail } from "../../utils/validation";
 interface AuthContextType {
   isAuthenticated: boolean;
   signIn: (email: string, password: string) => Promise<boolean>;
@@ -53,8 +54,13 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({
     const users = JSON.parse(getFromStorage("users") || "[]");
     const user = users.find((user: { email: string }) => user.email === email);
     console.log(user);
+    const isEmail = isValidEmail(email);
+    console.log(isEmail);
     if (user) {
       alert("회원이메일이 존재합니다.");
+      return false;
+    } else if (!isEmail) {
+      alert("이메일이 올바르지 않습니다.");
       return false;
     } else {
       // 새로운 사용자 추가

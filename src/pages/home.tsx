@@ -10,6 +10,7 @@ const Main: React.FC = () => {
       <MovieList category="now_playing" title="지금 뜨는 콘텐츠" />
       <MovieList category="top_rated" title="최고 평점 콘텐츠" />
       <MovieList category="upcoming" title="개봉 예정 콘텐츠" />
+      <MovieList category="popular" title="인기 콘텐츠" />
     </div>
   );
 };

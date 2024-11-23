@@ -6,7 +6,9 @@
   padding: 20px;
   background-color: #1c1c1c; /* 어두운 배경 */
 }
-
+.movie-list::-webkit-scrollbar {
+  display: none;
+}
 /* 개별 영화 항목 */
 .movie-item {
   text-align: center;

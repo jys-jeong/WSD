@@ -7,3 +7,7 @@ export interface Movie {
   release_date: string;
   backdrop_path: string;
 }
+export interface MovieItemProps {
+  movie: Movie;
+  onToggleWishlist: (movie: Movie) => void; // 부모 컴포넌트에서 전달된 함수
+}

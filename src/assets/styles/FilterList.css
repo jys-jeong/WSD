@@ -1,6 +1,5 @@
 /* MovieList.css */
 .movie-list {
-  display: flex;
   gap: 20px;
   overflow-x: auto;
   padding: 20px;

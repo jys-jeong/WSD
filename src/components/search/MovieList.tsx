@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { tmdb } from "../../utils/URL";
-import MovieItem from "./MovieItem";
-
+import MovieItem from "../MovieItem";
+import { toggleWishlist } from "../../utils/toggleWishlist";
+import { Movie } from "../../types/Movie";
+import Pagination from "../Pagination";
 interface MovieListProps {
   genre: string | null;
   rating: number | null;
@@ -19,7 +21,7 @@ const MovieList: React.FC<MovieListProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
-
+  const [wishlist, setWishlist] = useState<Movie[]>([]);
   // 필터 변경 시 페이지 초기화
   useEffect(() => {
     setCurrentPage(1);
@@ -46,11 +48,6 @@ const MovieList: React.FC<MovieListProps> = ({
   }, [currentPage, genre, rating, sortBy, sortDirection]);
 
   // 페이지 변경 핸들러
-  const handlePageChange = (newPage: number) => {
-    if (newPage > 0 && newPage <= totalPages) {
-      setCurrentPage(newPage);
-    }
-  };
 
   return (
     <div>
@@ -59,29 +56,20 @@ const MovieList: React.FC<MovieListProps> = ({
       ) : (
         <div className="movie-list">
           {movies.map((movie) => (
-            <MovieItem key={movie.id} movie={movie} />
+            <MovieItem
+              key={movie.id}
+              movie={movie}
+              onToggleWishlist={(movie) => toggleWishlist(movie, setWishlist)}
+            />
           ))}
         </div>
       )}
 
-      {/* 페이지네이션 UI */}
-      <div className="pagination">
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <span>
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages} // 임의의 총 페이지 수
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 };

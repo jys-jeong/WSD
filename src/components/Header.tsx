@@ -1,27 +1,55 @@
 // src/components/Header.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../assets/styles/Header.css"; // 스타일 파일 임포트
+import "../assets/styles/Header.css";
 import { removeFromStorage } from "../utils/localstorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilm } from "@fortawesome/free-solid-svg-icons";
+import { faFilm, faUser } from "@fortawesome/free-solid-svg-icons";
+
 const Header: React.FC = () => {
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false); // 헤더 표시 상태
+  const [isScrolled, setIsScrolled] = useState(false); // 스크롤 여부 상태
+
+  useEffect(() => {
+    // 1초 후 헤더를 나타내기 위한 타이머
+    setTimeout(() => {
+      setIsVisible(true);
+    }, 1000);
+
+    // 스크롤 이벤트 리스너 추가
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true); // 스크롤 50px 이상이면 배경 색 변경
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll); // 컴포넌트 언마운트 시 이벤트 리스너 제거
+    };
+  }, []);
 
   const handleSignOut = () => {
     removeFromStorage("TMDb-Key");
     alert("로그아웃되었습니다.");
-    navigate("/signin"); // 로그아웃 후 로그인 페이지로 이동
+    navigate("/signin");
   };
 
   return (
-    <header className="header">
-      <div className="header__logo">
-        <Link to="/">
-          <FontAwesomeIcon icon={faFilm} size="3x" style={{ color: "red" }} />
-        </Link>
-      </div>
+    <header
+      className={`header ${isVisible ? "show" : ""} ${
+        isScrolled ? "scrolled" : ""
+      }`}
+    >
+      <div className="header__logo"></div>
       <nav className="header__nav">
+        <Link to="/" className="header__navItem">
+          <FontAwesomeIcon icon={faFilm} size="2x" style={{ color: "red" }} />
+        </Link>
         <Link to="/" className="header__navItem">
           홈
         </Link>
@@ -47,11 +75,7 @@ const Header: React.FC = () => {
             padding: 0,
           }}
         >
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Avatar_icon.png"
-            alt="Profile"
-            className="header__profileImage"
-          />
+          <FontAwesomeIcon icon={faUser} size="2x" style={{ color: "white" }} />
         </button>
       </div>
     </header>

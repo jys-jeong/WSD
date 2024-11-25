@@ -1,6 +1,6 @@
 // src/components/Auth/AuthForm.tsx
 import React from "react";
-// import "./AuthForm.css"; // 스타일링 추가 가능
+// 스타일링 추가 가능
 
 interface AuthFormProps {
   children: React.ReactNode;

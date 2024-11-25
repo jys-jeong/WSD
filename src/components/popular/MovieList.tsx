@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from "react";
-import axios from "axios";
 import Pagination from "../Pagination";
 import { calculateLayout } from "../../utils/calculateLayout";
 import "../../assets/styles/MovieGrid.css";

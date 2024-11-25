@@ -3,6 +3,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/styles/Header.css"; // 스타일 파일 임포트
 import { removeFromStorage } from "../utils/localstorage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilm } from "@fortawesome/free-solid-svg-icons";
 const Header: React.FC = () => {
   const navigate = useNavigate();
 
@@ -16,11 +18,7 @@ const Header: React.FC = () => {
     <header className="header">
       <div className="header__logo">
         <Link to="/">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
-            alt="Logo"
-            className="header__logoImage"
-          />
+          <FontAwesomeIcon icon={faFilm} size="3x" style={{ color: "red" }} />
         </Link>
       </div>
       <nav className="header__nav">

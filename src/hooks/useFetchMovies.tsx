@@ -24,7 +24,7 @@ const useFetchMovies = (category: string) => {
             data = await tmdb.getUpcoming();
             break;
           default:
-            data = await tmdb.fetchMovies();
+            data = await tmdb.fetchMovies(1);
         }
 
         setMovies(data);

@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import PageMovieList from "../components/popular/MovieList";
-import InfiniteMovieList from "../components/popular/InfiniteScroll";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTableCellsLarge, faBars } from "@fortawesome/free-solid-svg-icons";
+import PageMovieList from "../components/popular/PageMovieList";
+import InfiniteMovieList from "../components/popular/InfiniteMovieList";
 import { tmdb } from "../utils/URL";
 import Header from "../components/Header";
-
+import "../assets/styles/Popular.css";
 export const Popular: React.FC = () => {
   const [movies, setMovies] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0); // 총 페이지 수
   const [viewMode, setViewMode] = useState<"page" | "infinite">("page"); // 현재 뷰 모드
   const [loading, setLoading] = useState(false);
+
   // API에서 영화 데이터 가져오기
   useEffect(() => {
     const fetchMovies = async () => {
@@ -30,13 +33,17 @@ export const Popular: React.FC = () => {
   return (
     <div>
       <Header />
-      <header>
-        <h1>영화 목록</h1>
-      </header>
       <div className="view-toggle">
         {/* 버튼으로 뷰 모드 전환 */}
-        <button onClick={() => setViewMode("page")}>Page View</button>
-        <button onClick={() => setViewMode("infinite")}>Infinite Scroll</button>
+        <button onClick={() => setViewMode("page")} className="view-toggle-btn">
+          <FontAwesomeIcon icon={faTableCellsLarge} />
+        </button>
+        <button
+          onClick={() => setViewMode("infinite")}
+          className="view-toggle-btn"
+        >
+          <FontAwesomeIcon icon={faBars} />
+        </button>
       </div>
       {loading ? (
         <p>Loading...</p>

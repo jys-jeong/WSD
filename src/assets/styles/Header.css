@@ -1,23 +1,31 @@
 /* src/components/Header.css */
 
+/* 초기 상태: 헤더는 화면 상단 밖에 위치 */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #141414;
   padding: 20px;
-
-  top: 0;
-  width: 100%;
+  position: fixed;
+  top: -80px; /* 페이지 로딩 시 헤더는 화면 밖 */
+  left: 0;
+  right: 0;
   z-index: 100;
+  transition: top 0.3s ease-in-out, background-color 0.3s ease; /* 슬라이딩과 배경색 변화를 동시에 처리 */
 }
 
+.header.show {
+  top: 0; /* 화면 상단에 고정되도록 설정 */
+}
+
+.header.scrolled {
+  background-color: rgba(0, 0, 0, 0.8); /* 스크롤 시 배경 어두워짐 */
+}
+
+/* 헤더 내 항목 스타일 */
 .header__logo {
   flex: 1;
-}
-
-.header__logoImage {
-  height: 40px;
 }
 
 .header__nav {
@@ -33,6 +41,8 @@
   margin: 0 20px;
   text-decoration: none;
   transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 .header__navItem:hover {

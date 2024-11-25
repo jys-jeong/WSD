@@ -20,10 +20,6 @@ const Banner: React.FC = () => {
       <div className="banner_contents">
         <h1 className="banner_title">{movie?.title}</h1>
         <p className="banner_description">{movie?.overview}</p>
-        <div className="banner_buttons">
-          <button className="banner_button">재생</button>
-          <button className="banner_button">상세 정보</button>
-        </div>
       </div>
       <div className="banner--fadeBottom" />
     </div>

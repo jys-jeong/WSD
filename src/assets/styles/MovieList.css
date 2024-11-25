@@ -1,40 +1,103 @@
+/* Container styling */
 .movie-list-container {
-  position: relative;
-  margin: 20px;
+  margin: 20px auto;
+  width: 90%;
 }
 
+.movie-list-container h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+}
+
+/* Slider Wrapper */
 .movie-slider-wrapper {
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
+  overflow: hidden;
 }
 
+/* Slider */
 .movie-slider {
   display: flex;
-  overflow-x: scroll;
+  gap: 15px;
+  overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 10px 0;
-  scrollbar-width: none; /* Firefox */
+  padding: 10px;
+  scrollbar-width: none; /* For Firefox */
 }
 
 .movie-slider::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  display: none; /* For Chrome, Safari, and Edge */
 }
 
+/* Scroll Buttons */
+.scroll-button {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  border-radius: 10%;
+  width: 50px; /* MovieItem과 동일한 너비로 설정 */
+  height: 200px; /* MovieItem과 동일한 높이로 설정 */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  transition: background-color 0.3s ease;
+  margin: 0 15px; /* 리스트와 버튼 사이 여백 */
+}
+
+.scroll-button:disabled {
+  background-color: rgba(0, 0, 0, 0.3);
+  cursor: not-allowed;
+  pointer-events: none; /* 클릭 방지 */
+}
+/* 버튼 배치 조정 */
+.scroll-button.left {
+  order: -1; /* 왼쪽 버튼을 슬라이더 앞에 배치 */
+}
+
+.scroll-button.right {
+  order: 1; /* 오른쪽 버튼을 슬라이더 뒤에 배치 */
+}
+
+/* Wrapper 영역 스타일 */
+.scroll-button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+/* Slider Wrapper (플렉스 조정) */
+.movie-slider-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+/* Movie Item */
 .movie-item {
   position: relative;
-  min-width: 150px;
-  margin: 0 5px;
+  min-width: 200px;
+  max-width: 200px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.movie-poster {
+.movie-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.movie-item img {
   width: 100%;
   border-radius: 8px;
-  transition: transform 0.3s;
-}
-
-.movie-item:hover .movie-poster {
-  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .movie-overlay {
@@ -58,36 +121,17 @@
   opacity: 1;
 }
 
+/* Movie Details */
 .movie-title {
   font-size: 16px;
   font-weight: bold;
-  margin: 5px 0;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .movie-rating,
 .movie-release-date {
   font-size: 14px;
-  margin: 2px 0;
-}
-
-.scroll-button {
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  font-size: 24px;
-  width: 40px;
-  height: 100%;
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-}
-
-.scroll-button.left {
-  left: 0;
-}
-
-.scroll-button.right {
-  right: 0;
+  margin: 4px 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }

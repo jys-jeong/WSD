@@ -8,14 +8,11 @@ import { faFilm, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(false); // 헤더 표시 상태
+
   const [isScrolled, setIsScrolled] = useState(false); // 스크롤 여부 상태
 
   useEffect(() => {
     // 1초 후 헤더를 나타내기 위한 타이머
-    setTimeout(() => {
-      setIsVisible(true);
-    }, 1000);
 
     // 스크롤 이벤트 리스너 추가
     const handleScroll = () => {
@@ -40,11 +37,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header
-      className={`header ${isVisible ? "show" : ""} ${
-        isScrolled ? "scrolled" : ""
-      }`}
-    >
+    <header className={`header show ${isScrolled ? "scrolled" : ""}`}>
       <div className="header__logo"></div>
       <nav className="header__nav">
         <Link to="/" className="header__navItem">

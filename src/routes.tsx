@@ -1,4 +1,3 @@
-// /src/routes/AppRoutes.tsx
 import React, { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -21,6 +20,7 @@ const AppRoutes: React.FC = () => {
   const location = useLocation(); // 현재 위치를 가져옴
 
   // 로그인 상태 변경 콜백
+
   const handleLoginStatusChange = ({
     success,
     message,
@@ -32,58 +32,64 @@ const AppRoutes: React.FC = () => {
     setToastType(success ? "success" : "error"); // 타입 설정
   };
 
+  const noTransitionRoutes = ["/signin"]; // 애니메이션 제외 경로
+
+  const isTransitionEnabled = !noTransitionRoutes.includes(location.pathname);
+
   return (
     <div>
       <TransitionGroup className="page-transition-container">
-        <CSSTransition key={location.key} timeout={500} classNames="page">
-          <div>
-            <Routes location={location}>
-              {/* 공개 경로 */}
-              <Route
-                path="/"
-                element={
-                  <ProtectedRoute isAuthenticated={isAuthenticated}>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/signin"
-                element={
-                  <PublicRoute isAuthenticated={isAuthenticated} redirectTo="/">
-                    <AuthPage onLoginStatusChange={handleLoginStatusChange} />
-                  </PublicRoute>
-                }
-              />
-
-              {/* 보호된 경로 */}
-              <Route
-                path="/popular"
-                element={
-                  <ProtectedRoute isAuthenticated={isAuthenticated}>
-                    <Popular />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/search"
-                element={
-                  <ProtectedRoute isAuthenticated={isAuthenticated}>
-                    <SearchPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/wishlist"
-                element={
-                  <ProtectedRoute isAuthenticated={isAuthenticated}>
-                    <Wishlist />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-          </div>
-        </CSSTransition>
+        {isTransitionEnabled ? (
+          <CSSTransition key={location.key} timeout={500} classNames="page">
+            <div>
+              <Routes location={location}>
+                <Route
+                  path="/"
+                  element={
+                    <ProtectedRoute isAuthenticated={isAuthenticated}>
+                      <Home />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/popular"
+                  element={
+                    <ProtectedRoute isAuthenticated={isAuthenticated}>
+                      <Popular />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/search"
+                  element={
+                    <ProtectedRoute isAuthenticated={isAuthenticated}>
+                      <SearchPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/wishlist"
+                  element={
+                    <ProtectedRoute isAuthenticated={isAuthenticated}>
+                      <Wishlist />
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
+            </div>
+          </CSSTransition>
+        ) : (
+          <Routes location={location}>
+            <Route
+              path="/signin"
+              element={
+                <PublicRoute isAuthenticated={isAuthenticated} redirectTo="/">
+                  <AuthPage onLoginStatusChange={handleLoginStatusChange} />
+                </PublicRoute>
+              }
+            />
+          </Routes>
+        )}
       </TransitionGroup>
 
       {/* Toast 표시 */}

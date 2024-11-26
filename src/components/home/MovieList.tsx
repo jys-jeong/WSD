@@ -44,14 +44,18 @@ const MovieList: React.FC<MovieListProps> = ({ category, title }) => {
   };
 
   useEffect(() => {
-    if (sliderRef.current) {
-      handleScroll(); // 초기 버튼 상태 업데이트
-      sliderRef.current.addEventListener("scroll", handleScroll);
+    const sliderElement = sliderRef.current; // sliderRef.current 값을 복사
 
-      return () =>
-        sliderRef.current?.removeEventListener("scroll", handleScroll);
+    if (sliderElement) {
+      handleScroll(); // 초기 버튼 상태 업데이트
+      sliderElement.addEventListener("scroll", handleScroll);
+
+      return () => {
+        sliderElement.removeEventListener("scroll", handleScroll); // 복사된 값 사용
+      };
     }
-  }, [movies]); // movies가 업데이트될 때마다 스크롤 상태 체크
+  }, [movies]);
+  // movies가 업데이트될 때마다 스크롤 상태 체크
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;

@@ -78,6 +78,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({
   const signOut = () => {
     setIsAuthenticated(false);
     removeFromStorage("isAuthenticated");
+    localStorage.removeItem("recent-search");
   };
 
   return (

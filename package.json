@@ -1,4 +1,5 @@
 {
+  "homepage": "https://jys-jeong.github.io/WSD/",
   "name": "wsd-assignment-02",
   "version": "0.1.0",
   "private": true,
@@ -31,8 +32,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "clean": "gh-pages-clean",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -13,7 +13,7 @@ import "./AppRoutes.css"; // transition 관련 CSS 파일 임포트
 
 const AppRoutes: React.FC = () => {
   const isAuthenticated =
-    localStorage.getItem("remembered-email") !== null ||
+    localStorage.getItem("email") !== null ||
     localStorage.getItem("isAuthenticated") !== null;
   const location = useLocation(); // 현재 위치를 가져옴
 

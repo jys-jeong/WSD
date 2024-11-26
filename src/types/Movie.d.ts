@@ -9,5 +9,5 @@ export interface Movie {
 }
 export interface MovieItemProps {
   movie: Movie;
-  onToggleWishlist: (movie: Movie) => void; // 부모 컴포넌트에서 전달된 함수
+  onToggleWishlist: (movie: Movie, email: string | null) => void; // 부모 컴포넌트에서 전달된 함수
 }

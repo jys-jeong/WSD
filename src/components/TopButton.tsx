@@ -1,4 +1,4 @@
-import "../../assets/styles/TopButton.css";
+import "../assets/styles/TopButton.css";
 const TopButton: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo({

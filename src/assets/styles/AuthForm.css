@@ -6,6 +6,10 @@
   --text-light-gray: #b3b3b3; /* 연한 회색 텍스트 */
 }
 
+body {
+  margin-top: 0;
+}
+
 .auth-page {
   margin: 0;
   padding: 0;
@@ -49,6 +53,20 @@ form input[type="password"] {
   border-radius: 4px;
   background-color: var(--secondary-gray);
   color: #fff;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+form input[type="email"]::placeholder,
+form input[type="password"]::placeholder {
+  transition: transform 0.3s ease, font-size 0.3s ease;
+  font-size: 1rem;
+}
+
+form input[type="email"]:focus::placeholder,
+form input[type="password"]:focus::placeholder {
+  transform: translateX(-40px) translateY(-10px) scale(0.8); /* 애니메이션 효과 추가 */
+  font-size: 0.7rem; /* 글씨 작아지기 */
 }
 
 form label {
@@ -62,22 +80,22 @@ form label {
 form label input[type="checkbox"] {
   margin-right: 8px;
 }
-
 form button {
   width: 100%;
   padding: 12px;
   font-size: 1rem;
   color: #fff;
-  background-color: var(--primary-red);
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-bottom: 10px;
 }
-
-form button:hover {
-  background-color: var(--hover-red);
+form button[type="submit"] {
+  background-color: var(--primary-red);
+}
+form button[type="button"] {
+  background-color: var(--secondary-gray);
 }
 
 form a {
@@ -91,23 +109,23 @@ form a {
 form a:hover {
   text-decoration: underline;
 }
+
+/* form-container 애니메이션 (오른쪽에서 왼쪽으로 이동하고 크기 확대) */
 .form-container {
   width: 100%;
   transition: opacity 0.5s ease, transform 0.5s ease;
   opacity: 0;
-  transform: translateX(100%); /* 처음에 폼을 화면 바깥으로 위치시킴 */
+  transform: translateX(100%) scale(0.8); /* 오른쪽에서 시작하고 크기를 축소 */
 }
 
 .form-container.visible {
   opacity: 1;
-  transform: translateX(0); /* 화면에 보이도록 전환 */
+  transform: translateX(0) scale(1); /* 왼쪽으로 이동하며 크기를 원래 크기로 확대 */
 }
 
 .form-container.animating-out {
   opacity: 0;
-  transform: translateX(
-    -100%
-  ); /* 애니메이션으로 폼을 왼쪽으로 이동시키며 사라짐 */
+  transform: translateX(-100%) scale(0.8); /* 왼쪽으로 이동하며 크기를 축소 */
 }
 
 @media (max-width: 768px) {

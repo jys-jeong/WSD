@@ -8,10 +8,11 @@ export const getWishlist = (): Movie[] => {
 
 export const toggleWishlist = (
   movie: Movie,
+  wishlist: Movie[],
   setWishlist: (wishlist: Movie[]) => void
 ) => {
   const currentWishlist = getWishlist();
-
+  console.log(wishlist);
   if (currentWishlist.some((item: Movie) => item.id === movie.id)) {
     // 위시리스트에서 제거
     const updatedWishlist = currentWishlist.filter(

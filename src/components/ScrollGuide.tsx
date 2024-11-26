@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaArrowDown } from "react-icons/fa"; // 아이콘 임포트
-import "../../assets/styles/Infinite.css";
+import "../assets/styles/Infinite.css";
 
 const ScrollGuide = () => {
   const [showGuide, setShowGuide] = useState(true);

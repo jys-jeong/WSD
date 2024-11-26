@@ -27,13 +27,10 @@ const PageMovieList: React.FC = () => {
 
   const fetchMovies = async (page: number) => {
     try {
-      console.log(`Fetching movies for page: ${page}`);
       const response = await tmdb.fetchMovies(page);
-      console.log("Fetched movies:", response);
       if (Array.isArray(response)) {
         setMovies((prevMovies) => {
           const newMovies = response;
-          // 기존 영화 목록에 새로운 영화 추가 (중복 제거)
           const updatedMovies = [
             ...prevMovies,
             ...newMovies.filter(
@@ -92,9 +89,10 @@ const PageMovieList: React.FC = () => {
           >
             {currentMovies.map((movie) => (
               <MovieItem
-                key={movie.id}
                 movie={movie}
-                onToggleWishlist={(movie) => toggleWishlist(movie, setWishlist)}
+                onToggleWishlist={(movie) =>
+                  toggleWishlist(movie, wishlist, setWishlist)
+                }
               />
             ))}
           </div>

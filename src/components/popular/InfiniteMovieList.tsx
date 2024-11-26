@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { tmdb } from "../../utils/URL";
 import InfiniteScroll from "react-infinite-scroll-component";
-import TopButton from "./TopButton";
+import TopButton from "../TopButton";
 import MovieItem from "../MovieItem";
 import { Movie } from "../../types/Movie"; // Movie 타입을 가져옵니다.
 import { toggleWishlist } from "../../utils/toggleWishlist";
-import ScrollGuide from "./ScrollGuide"; // ScrollGuide 컴포넌트 임포트
+import ScrollGuide from "../ScrollGuide"; // ScrollGuide 컴포넌트 임포트
 import "../../assets/styles/Infinite.css";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 const InfiniteMovieList = () => {
   const [movies, setMovies] = useState<Movie[]>([]); // Movie[] 타입으로 지정
   const [loading, setLoading] = useState(false);
@@ -85,11 +86,23 @@ const InfiniteMovieList = () => {
       >
         <div className="movie-list">
           {movies.map((movie: Movie) => (
-            <MovieItem
-              key={movie.id}
-              movie={movie}
-              onToggleWishlist={(movie) => toggleWishlist(movie, setWishlist)}
-            />
+            <div>
+              <MovieItem
+                key={movie.id}
+                movie={movie}
+                onToggleWishlist={(movie) =>
+                  toggleWishlist(movie, wishlist, setWishlist)
+                }
+              />
+              <p className="movie-title1">{movie.title}</p>
+              {/* 평점과 아이콘을 나란히 배치 */}
+              <div className="vote">
+                <FontAwesomeIcon icon={faStar} style={{ color: "yellow" }} />
+                <p className="votenum">
+                  {Math.round(movie.vote_average * 10) / 10}
+                </p>
+              </div>
+            </div>
           ))}
         </div>
       </InfiniteScroll>

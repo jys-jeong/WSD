@@ -42,7 +42,9 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie, onToggleWishlist }) => {
       )}
       <div className="movie-overlay" onClick={handleToggleWishlist}>
         <h3 className="movie-title">{movie.title}</h3>
-        <p className="movie-rating">평점 {movie.vote_average}</p>
+        <p className="movie-rating">
+          평점 {Math.round(movie.vote_average * 10) / 10}
+        </p>
         {isInWishlist && (
           <FontAwesomeIcon
             icon={faBookmark}

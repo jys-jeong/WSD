@@ -2,17 +2,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/styles/Header.css";
-import { removeFromStorage } from "../utils/localstorage";
+import { getFromStorage, removeFromStorage } from "../utils/localstorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilm, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faFilm, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "../hooks/useAuth";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-
+  const { signOut } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false); // 스크롤 여부 상태
+  const [email, setEmail] = useState<string | null>(null); // 사용자 이메일 상태
 
   useEffect(() => {
-    // 1초 후 헤더를 나타내기 위한 타이머
+    // 사용자 이메일을 로컬스토리지에서 가져옴
+    const storedEmail = getFromStorage("email");
+    setEmail(storedEmail);
 
     // 스크롤 이벤트 리스너 추가
     const handleScroll = () => {
@@ -30,8 +34,10 @@ const Header: React.FC = () => {
     };
   }, []);
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
+    signOut();
     removeFromStorage("TMDb-Key");
+    removeFromStorage("email"); // 로그아웃 시 이메일도 제거
     alert("로그아웃되었습니다.");
     navigate("/signin");
   };
@@ -57,18 +63,15 @@ const Header: React.FC = () => {
         </Link>
       </nav>
       <div className="header__profile">
-        {/* 로그아웃 버튼 추가 */}
-        <button
-          onClick={handleSignOut}
-          className="header__profileButton"
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: 0,
-          }}
-        >
-          <FontAwesomeIcon icon={faUser} size="2x" style={{ color: "white" }} />
+        {/* 사용자 이메일 표시 */}
+        {email && <span className="header__email">{email}님</span>}
+        {/* 로그아웃 버튼 */}
+        <button onClick={handleSignOut} className="header__profileButton">
+          <FontAwesomeIcon
+            icon={faRightFromBracket}
+            size="2x"
+            style={{ color: "white" }}
+          />
         </button>
       </div>
     </header>

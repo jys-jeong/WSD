@@ -13,7 +13,7 @@ const SearchPage: React.FC = () => {
   return (
     <div>
       <Header />
-      {/* 필터링 UI */}
+
       <FilterBar
         onGenreChange={setGenre}
         onRatingChange={setRating}

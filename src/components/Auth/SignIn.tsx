@@ -1,4 +1,3 @@
-// src/components/Auth/SignIn.tsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
@@ -38,6 +37,7 @@ const SignIn: React.FC<SignInProps> = ({ onToggle, className }) => {
 
     if (success && validEmail) {
       saveToStorage("TMDb-Key", password);
+      saveToStorage("email", email);
       if (rememberMe) {
         saveToStorage("remembered-email", email);
         saveToStorage("remember-me", "true");

@@ -2,7 +2,7 @@ import axios from "axios";
 import { getFromStorage } from "./localstorage";
 const API_KEY = getFromStorage("TMDb-Key");
 const BASE_URL = "https://api.themoviedb.org/3";
-
+const lang = process.env.REACT_APP_DEFAULT_LANGUAGE;
 export class TMDB {
   filterMovies = async ({
     page,
@@ -26,8 +26,9 @@ export class TMDB {
   fetchMovies = async (page: number = 1) => {
     try {
       const response = await axios.get(`${BASE_URL}/movie/popular`, {
-        params: { api_key: API_KEY, language: "ko-KR", page: page },
+        params: { api_key: API_KEY, language: lang, page: page },
       });
+      console.log(lang);
       return response.data.results;
     } catch (error) {
       console.error("Failed to fetch movies:", error);
@@ -38,7 +39,7 @@ export class TMDB {
   getNowPlaying = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/movie/now_playing`, {
-        params: { api_key: API_KEY, language: "ko-KR", page: 2 },
+        params: { api_key: API_KEY, language: lang, page: 2 },
       });
       return response.data.results;
     } catch (error) {
@@ -50,7 +51,7 @@ export class TMDB {
   getTop_Rated = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/movie/top_rated`, {
-        params: { api_key: API_KEY, language: "ko-KR", page: 2 },
+        params: { api_key: API_KEY, language: lang, page: 2 },
       });
       return response.data.results;
     } catch (error) {

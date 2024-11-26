@@ -7,11 +7,14 @@ import SignIn from "./pages/signin";
 import Popular from "./pages/popular";
 import SearchPage from "./pages/search";
 import Wishlist from "./pages/wishlist";
-import ProtectedRoute from "./components/Auth/ProtectedRoute"; // ProtectedRoute 가져오기
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import PublicRoute from "./components/Auth/PublicRoute"; // ProtectedRoute 가져오기
 import "./AppRoutes.css"; // transition 관련 CSS 파일 임포트
 
 const AppRoutes: React.FC = () => {
-  const isAuthenticated = localStorage.getItem("TMDb-Key") !== null;
+  const isAuthenticated =
+    localStorage.getItem("remembered-email") !== null ||
+    localStorage.getItem("isAuthenticated") !== null;
   const location = useLocation(); // 현재 위치를 가져옴
 
   return (
@@ -28,7 +31,14 @@ const AppRoutes: React.FC = () => {
                 </ProtectedRoute>
               }
             />
-            <Route path="/signin" element={<SignIn />} />
+            <Route
+              path="/signin"
+              element={
+                <PublicRoute isAuthenticated={isAuthenticated} redirectTo="/">
+                  <SignIn />
+                </PublicRoute>
+              }
+            />
 
             {/* 보호된 경로 */}
             <Route

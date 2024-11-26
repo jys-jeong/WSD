@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTableCellsLarge, faBars } from "@fortawesome/free-solid-svg-icons";
 import PageMovieList from "../components/popular/PageMovieList";

@@ -16,7 +16,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
   // 각 필터 상태 관리
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
-  const [selectedSortBy, setSelectedSortBy] = useState<string>("popularity");
+  const [selectedSortBy, setSelectedSortBy] = useState<string>("vote_average");
   const [selectedSortDirection, setSelectedSortDirection] =
     useState<string>("desc");
 
@@ -45,14 +45,14 @@ const FilterBar: React.FC<FilterBarProps> = ({
   const handleResetFilters = () => {
     setSelectedGenre(null);
     setSelectedRating(null);
-    setSelectedSortBy("popularity");
+    setSelectedSortBy("vote_average");
     setSelectedSortDirection("desc");
 
     // 부모 컴포넌트에 초기값 전달
     onGenreChange(null);
     onRatingChange(null);
-    onSortByChange("popularity");
-    onSortDirectionChange("desc");
+    onSortByChange("vote_average");
+    onSortDirectionChange("null");
   };
 
   return (
@@ -62,16 +62,16 @@ const FilterBar: React.FC<FilterBarProps> = ({
         value={selectedGenre || ""}
         onChange={(e) => handleGenreChange(e.target.value || null)}
       >
-        <option value="">All Genres</option>
-        <option value="28">Action</option>
-        <option value="35">Comedy</option>
-        <option value="18">Drama</option>
-        <option value="12">Adventure</option>
-        <option value="16">Animation</option>
-        <option value="80">Crime</option>
-        <option value="10751">Family</option>
-        <option value="14">Fantasy</option>
-        <option value="36">History</option>
+        <option value="">장르별</option>
+        <option value="28">액션</option>
+        <option value="35">코미디</option>
+        <option value="18">드라마</option>
+        <option value="12">모험</option>
+        <option value="16">애니메이션</option>
+        <option value="80">범죄</option>
+        <option value="10751">가족</option>
+        <option value="14">판타지</option>
+        <option value="36">역사</option>
       </select>
 
       {/* 평점 필터 */}
@@ -79,7 +79,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
         value={selectedRating ? String(selectedRating) : ""}
         onChange={(e) => handleRatingChange(Number(e.target.value) || null)}
       >
-        <option value="">All Ratings</option>
+        <option value="">평점별</option>
         <option value="9">9+</option>
         <option value="8">8+</option>
         <option value="7">7+</option>
@@ -91,9 +91,9 @@ const FilterBar: React.FC<FilterBarProps> = ({
         value={selectedSortBy}
         onChange={(e) => handleSortByChange(e.target.value)}
       >
-        <option value="popularity">Popularity</option>
-        <option value="release_date">Release Date</option>
-        <option value="vote_average">Vote Average</option>
+        <option value="vote_average">평점순</option>
+        <option value="popularity">인기 영화</option>
+        <option value="release_date">출시일</option>
       </select>
 
       {/* 정렬 방향 필터 */}
@@ -101,12 +101,14 @@ const FilterBar: React.FC<FilterBarProps> = ({
         value={selectedSortDirection}
         onChange={(e) => handleSortDirectionChange(e.target.value)}
       >
-        <option value="desc">Descending</option>
-        <option value="asc">Ascending</option>
+        <option value="desc">내림차순</option>
+        <option value="asc">오름차순</option>
       </select>
 
       {/* 초기화 버튼 */}
-      <button onClick={handleResetFilters}>Reset Filters</button>
+      <button className="reset-button" onClick={handleResetFilters}>
+        초기화
+      </button>
     </div>
   );
 };

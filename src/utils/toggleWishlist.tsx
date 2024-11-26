@@ -19,12 +19,10 @@ export const toggleWishlist = (
     );
     saveToStorage("wishlist", JSON.stringify(updatedWishlist));
     setWishlist(updatedWishlist); // 상태 갱신
-    alert(`${movie.title}가 찜 목록에서 제거되었습니다.`);
   } else {
     // 위시리스트에 추가
     const updatedWishlist = [...currentWishlist, movie];
     saveToStorage("wishlist", JSON.stringify(updatedWishlist));
     setWishlist(updatedWishlist); // 상태 갱신
-    alert(`${movie.title}가 찜 목록에 추가되었습니다.`);
   }
 };

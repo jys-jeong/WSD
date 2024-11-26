@@ -4,7 +4,11 @@ import "../../assets/styles/MovieList.css";
 import { Movie } from "../../types/Movie";
 import { toggleWishlist } from "../../utils/toggleWishlist";
 import MovieItem from "../MovieItem";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 interface MovieListProps {
   category: string;
   title: string;
@@ -61,7 +65,7 @@ const MovieList: React.FC<MovieListProps> = ({ category, title }) => {
           onClick={scrollLeft}
           disabled={isLeftDisabled}
         >
-          {"<"}
+          <FontAwesomeIcon icon={faChevronLeft} />
         </button>
         <div className="movie-slider" ref={sliderRef}>
           {movies.map((movie) => (
@@ -79,7 +83,7 @@ const MovieList: React.FC<MovieListProps> = ({ category, title }) => {
           onClick={scrollRight}
           disabled={isRightDisabled}
         >
-          {">"}
+          <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </div>
     </div>

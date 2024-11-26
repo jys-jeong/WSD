@@ -35,41 +35,42 @@
 
 /* Scroll Buttons */
 .scroll-button {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
   border: none;
-  border-radius: 10%;
-  width: 50px; /* MovieItem과 동일한 너비로 설정 */
-  height: 200px; /* MovieItem과 동일한 높이로 설정 */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1;
-  transition: background-color 0.3s ease;
-  margin: 0 15px; /* 리스트와 버튼 사이 여백 */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .scroll-button:disabled {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   cursor: not-allowed;
-  pointer-events: none; /* 클릭 방지 */
 }
-/* 버튼 배치 조정 */
+
+.scroll-button:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
+  transform: scale(1.1);
+}
+
 .scroll-button.left {
-  order: -1; /* 왼쪽 버튼을 슬라이더 앞에 배치 */
+  position: absolute;
+  left: 10px;
+  top: 50%;
 }
 
 .scroll-button.right {
-  order: 1; /* 오른쪽 버튼을 슬라이더 뒤에 배치 */
-}
-
-/* Wrapper 영역 스타일 */
-.scroll-button-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  position: absolute;
+  right: 10px;
+  top: 50%;
 }
 /* Slider Wrapper (플렉스 조정) */
 .movie-slider-wrapper {

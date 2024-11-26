@@ -7,20 +7,19 @@ import Popular from "./pages/popular";
 import SearchPage from "./pages/search";
 import Wishlist from "./pages/wishlist";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
-import PublicRoute from "./components/Auth/PublicRoute"; // ProtectedRoute 가져오기
-import Toast from "./components/Auth/Toast"; // Toast 컴포넌트 임포트
-import "./AppRoutes.css"; // transition 관련 CSS 파일 임포트
+import PublicRoute from "./components/Auth/PublicRoute";
+import Toast from "./components/Auth/Toast";
+import "./AppRoutes.css";
 
 const AppRoutes: React.FC = () => {
-  const [toastMessage, setToastMessage] = useState<string | null>(null); // Toast 메시지 상태
-  const [toastType, setToastType] = useState<"success" | "error">("success"); // Toast 타입 상태
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [toastType, setToastType] = useState<"success" | "error">("success");
   const isAuthenticated =
     localStorage.getItem("email") !== null ||
     localStorage.getItem("isAuthenticated") !== null;
-  const location = useLocation(); // 현재 위치를 가져옴
+  const location = useLocation();
 
   // 로그인 상태 변경 콜백
-
   const handleLoginStatusChange = ({
     success,
     message,
@@ -28,19 +27,30 @@ const AppRoutes: React.FC = () => {
     success: boolean;
     message: string;
   }) => {
-    setToastMessage(message); // 메시지 상태 업데이트
-    setToastType(success ? "success" : "error"); // 타입 설정
+    setToastMessage(message);
+    setToastType(success ? "success" : "error");
   };
 
-  const noTransitionRoutes = ["/signin"]; // 애니메이션 제외 경로
-
-  const isTransitionEnabled = !noTransitionRoutes.includes(location.pathname);
+  // 'signin' 경로는 TransitionGroup 밖에서 처리
+  const isSigninPage = location.pathname === "/signin";
 
   return (
     <div>
-      <TransitionGroup className="page-transition-container">
-        {isTransitionEnabled ? (
-          <CSSTransition key={location.key} timeout={500} classNames="page">
+      {/* signin 페이지는 TransitionGroup 외부에서 렌더링 */}
+      {isSigninPage ? (
+        <Routes location={location}>
+          <Route
+            path="/signin"
+            element={
+              <PublicRoute isAuthenticated={isAuthenticated} redirectTo="/">
+                <AuthPage onLoginStatusChange={handleLoginStatusChange} />
+              </PublicRoute>
+            }
+          />
+        </Routes>
+      ) : (
+        <TransitionGroup className="page-transition-container">
+          <CSSTransition key={location.key} timeout={300} classNames="page">
             <div>
               <Routes location={location}>
                 <Route
@@ -78,19 +88,8 @@ const AppRoutes: React.FC = () => {
               </Routes>
             </div>
           </CSSTransition>
-        ) : (
-          <Routes location={location}>
-            <Route
-              path="/signin"
-              element={
-                <PublicRoute isAuthenticated={isAuthenticated} redirectTo="/">
-                  <AuthPage onLoginStatusChange={handleLoginStatusChange} />
-                </PublicRoute>
-              }
-            />
-          </Routes>
-        )}
-      </TransitionGroup>
+        </TransitionGroup>
+      )}
 
       {/* Toast 표시 */}
       <Toast message={toastMessage} type={toastType} />

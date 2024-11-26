@@ -3,10 +3,9 @@ import { tmdb } from "../../utils/URL";
 import MovieItem from "../MovieItem";
 import { toggleWishlist } from "../../utils/toggleWishlist";
 import { Movie } from "../../types/Movie";
-import Pagination from "../Pagination";
-import ScrollGuide from "../popular/ScrollGuide";
+import ScrollGuide from "../ScrollGuide";
 import InfiniteScroll from "react-infinite-scroll-component";
-import TopButton from "../popular/TopButton";
+import TopButton from "../TopButton";
 interface MovieListProps {
   genre: string | null;
   rating: number | null;
@@ -98,7 +97,9 @@ const MovieList: React.FC<MovieListProps> = ({
             <MovieItem
               key={movie.id}
               movie={movie}
-              onToggleWishlist={(movie) => toggleWishlist(movie, setWishlist)}
+              onToggleWishlist={(movie) =>
+                toggleWishlist(movie, wishlist, setWishlist)
+              }
             />
           ))}
         </div>

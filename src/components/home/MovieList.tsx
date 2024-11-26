@@ -68,7 +68,9 @@ const MovieList: React.FC<MovieListProps> = ({ category, title }) => {
             <MovieItem
               key={movie.id}
               movie={movie}
-              onToggleWishlist={(movie) => toggleWishlist(movie, setWishlist)}
+              onToggleWishlist={(movie) =>
+                toggleWishlist(movie, wishlist, setWishlist)
+              }
             />
           ))}
         </div>

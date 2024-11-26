@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTableCellsLarge, faBars } from "@fortawesome/free-solid-svg-icons";
 import PageMovieList from "../components/popular/PageMovieList";
-import InfiniteMovieList from "../components/popular/InfiniteMovieList";
+import InfiniteMovie from "../components/popular/InfiniteMovieList";
 import { tmdb } from "../utils/URL";
 import Header from "../components/Header";
 import "../assets/styles/Popular.css";
@@ -50,7 +50,7 @@ export const Popular: React.FC = () => {
       ) : (
         <div className="movie-list-container">
           {/* 현재 뷰 모드에 따라 컴포넌트 렌더링 */}
-          {viewMode === "page" ? <PageMovieList /> : <InfiniteMovieList />}
+          {viewMode === "page" ? <PageMovieList /> : <InfiniteMovie />}
         </div>
       )}
     </div>

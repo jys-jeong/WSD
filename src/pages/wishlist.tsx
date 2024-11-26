@@ -23,7 +23,9 @@ const Wishlist: React.FC = () => {
               <MovieItem
                 key={movie.id}
                 movie={movie}
-                onToggleWishlist={(movie) => toggleWishlist(movie, setWishlist)}
+                onToggleWishlist={(movie) =>
+                  toggleWishlist(movie, wishlist, setWishlist)
+                }
               />
             ))
           ) : (

@@ -16,7 +16,7 @@ const Wishlist: React.FC = () => {
     <div>
       <Header />
       <div className="wishlist">
-        <h2>My Wishlist</h2>
+        <h2>나의 찜 리스트</h2>
         <div className="wishlist-container">
           {wishlist.length > 0 ? (
             wishlist.map((movie) => (

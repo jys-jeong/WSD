@@ -24,7 +24,6 @@ const MovieList: React.FC<MovieListProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [wishlist, setWishlist] = useState<Movie[]>([]);
-  const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [showTopButton, setShowTopButton] = useState(false);
   useEffect(() => {
@@ -41,13 +40,15 @@ const MovieList: React.FC<MovieListProps> = ({
         genre,
         rating,
         sortBy,
-        sortDirection, // 추가
-        pageSize: 40,
+        sortDirection,
+        pageSize: 40, // 한 페이지에 40개 항목 요청
       });
+
       if (fetchedMovies.length === 0) {
         setHasMore(false);
+      } else {
+        setMovies((prevMovies) => [...prevMovies, ...fetchedMovies.results]); // 기존 영화 목록에 새로운 영화 추가
       }
-      setMovies(fetchedMovies.results);
       setLoading(false);
     };
 

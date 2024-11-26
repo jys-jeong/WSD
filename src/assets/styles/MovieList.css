@@ -27,6 +27,7 @@
   scroll-behavior: smooth;
   padding: 10px;
   scrollbar-width: none; /* For Firefox */
+  margin: 0px 30px;
 }
 
 .movie-slider::-webkit-scrollbar {

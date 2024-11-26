@@ -1,15 +1,23 @@
-// InfiniteMovieList.tsx
+// InfiniteMovieListWrapper.tsx
 import React, { useState, useEffect } from "react";
-import { tmdb } from "../../utils/URL";
 import InfiniteScroll from "react-infinite-scroll-component";
-import TopButton from "../TopButton";
-import MovieList from "../MovieList"; // Import the new MovieList component
-import { Movie } from "../../types/Movie";
+import TopButton from "./TopButton";
+import ScrollGuide from "./ScrollGuide";
+import MovieList from "./MovieList";
+import { Movie } from "../types/Movie";
 
-import ScrollGuide from "../ScrollGuide";
-import "../../assets/styles/Infinite.css";
+// Generic Infinite Movie List Component
+interface InfiniteMovieListWrapperProps {
+  fetchMovies: (page: number, filters?: any) => Promise<any>; // Function to fetch movies
+  filters?: any; // Optional filters for fetching movies (genre, rating, etc.)
+  pageSize?: number; // Optional page size
+}
 
-const InfiniteMovieList = () => {
+const InfiniteMovieListWrapper: React.FC<InfiniteMovieListWrapperProps> = ({
+  fetchMovies,
+  filters = {},
+  pageSize = 20,
+}) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -17,16 +25,16 @@ const InfiniteMovieList = () => {
   const [showTopButton, setShowTopButton] = useState(false);
   const [wishlist, setWishlist] = useState<Movie[]>([]);
 
+  // Fetch movies from the API
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchData = async () => {
       setLoading(true);
-      const fetchedMovies = await tmdb.fetchMovies(page);
+      const fetchedMovies = await fetchMovies(page, { ...filters, pageSize });
 
       if (fetchedMovies.length === 0) {
         setHasMore(false);
       }
 
-      // Add only non-duplicate movies
       setMovies((prevMovies) => {
         const newMovies = fetchedMovies.filter(
           (movie: Movie) =>
@@ -38,10 +46,10 @@ const InfiniteMovieList = () => {
       setLoading(false);
     };
 
-    fetchMovies();
-  }, [page]);
+    fetchData();
+  }, [page, filters, fetchMovies, pageSize]);
 
-  // Show 'Back to Top' button
+  // Scroll-to-top button visibility
   const handleScroll = () => {
     if (window.pageYOffset > 300) {
       setShowTopButton(true);
@@ -57,6 +65,7 @@ const InfiniteMovieList = () => {
     };
   }, []);
 
+  // Fetch more data on scroll
   const fetchMoreData = () => {
     if (!loading && hasMore) {
       setPage((prevPage) => prevPage + 1);
@@ -93,4 +102,4 @@ const InfiniteMovieList = () => {
   );
 };
 
-export default InfiniteMovieList;
+export default InfiniteMovieListWrapper;

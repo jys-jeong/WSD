@@ -1,74 +1,94 @@
 // /src/routes/AppRoutes.tsx
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Home from "./pages/home";
-import SignIn from "./pages/signin";
+import AuthPage from "./pages/signin";
 import Popular from "./pages/popular";
 import SearchPage from "./pages/search";
 import Wishlist from "./pages/wishlist";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import PublicRoute from "./components/Auth/PublicRoute"; // ProtectedRoute 가져오기
+import Toast from "./components/Auth/Toast"; // Toast 컴포넌트 임포트
 import "./AppRoutes.css"; // transition 관련 CSS 파일 임포트
 
 const AppRoutes: React.FC = () => {
+  const [toastMessage, setToastMessage] = useState<string | null>(null); // Toast 메시지 상태
+  const [toastType, setToastType] = useState<"success" | "error">("success"); // Toast 타입 상태
   const isAuthenticated =
     localStorage.getItem("email") !== null ||
     localStorage.getItem("isAuthenticated") !== null;
   const location = useLocation(); // 현재 위치를 가져옴
 
-  return (
-    <TransitionGroup className="page-transition-container">
-      <CSSTransition key={location.key} timeout={500} classNames="page">
-        <div>
-          <Routes location={location}>
-            {/* 공개 경로 */}
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <Home />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/signin"
-              element={
-                <PublicRoute isAuthenticated={isAuthenticated} redirectTo="/">
-                  <SignIn />
-                </PublicRoute>
-              }
-            />
+  // 로그인 상태 변경 콜백
+  const handleLoginStatusChange = ({
+    success,
+    message,
+  }: {
+    success: boolean;
+    message: string;
+  }) => {
+    setToastMessage(message); // 메시지 상태 업데이트
+    setToastType(success ? "success" : "error"); // 타입 설정
+  };
 
-            {/* 보호된 경로 */}
-            <Route
-              path="/popular"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <Popular />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/search"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <SearchPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/wishlist"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <Wishlist />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </div>
-      </CSSTransition>
-    </TransitionGroup>
+  return (
+    <div>
+      <TransitionGroup className="page-transition-container">
+        <CSSTransition key={location.key} timeout={500} classNames="page">
+          <div>
+            <Routes location={location}>
+              {/* 공개 경로 */}
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/signin"
+                element={
+                  <PublicRoute isAuthenticated={isAuthenticated} redirectTo="/">
+                    <AuthPage onLoginStatusChange={handleLoginStatusChange} />
+                  </PublicRoute>
+                }
+              />
+
+              {/* 보호된 경로 */}
+              <Route
+                path="/popular"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <Popular />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/search"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <SearchPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/wishlist"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <Wishlist />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </div>
+        </CSSTransition>
+      </TransitionGroup>
+
+      {/* Toast 표시 */}
+      <Toast message={toastMessage} type={toastType} />
+    </div>
   );
 };
 

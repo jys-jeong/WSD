@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { tmdb } from "../../utils/URL";
-import MovieItem from "../MovieItem";
-import { toggleWishlist } from "../../utils/toggleWishlist";
+
 import { Movie } from "../../types/Movie";
 import ScrollGuide from "../ScrollGuide";
 import InfiniteScroll from "react-infinite-scroll-component";
 import TopButton from "../TopButton";
+import MovieList from "../MovieList";
 interface MovieListProps {
   genre: string | null;
   rating: number | null;
@@ -13,7 +13,7 @@ interface MovieListProps {
   sortDirection: string; // 추가
 }
 
-const MovieList: React.FC<MovieListProps> = ({
+const InfiniteMovieList: React.FC<MovieListProps> = ({
   genre,
   rating,
   sortBy,
@@ -92,17 +92,11 @@ const MovieList: React.FC<MovieListProps> = ({
         scrollThreshold={1.0} // 스크롤이 끝에 도달할 때만 데이터 로드
         endMessage={<p>No more movies</p>}
       >
-        <div className="movie-list">
-          {movies.map((movie: Movie) => (
-            <MovieItem
-              key={movie.id}
-              movie={movie}
-              onToggleWishlist={(movie) =>
-                toggleWishlist(movie, wishlist, setWishlist)
-              }
-            />
-          ))}
-        </div>
+        <MovieList
+          movies={movies}
+          wishlist={wishlist}
+          setWishlist={setWishlist}
+        />
       </InfiniteScroll>
 
       {showTopButton && <TopButton />}
@@ -110,4 +104,4 @@ const MovieList: React.FC<MovieListProps> = ({
   );
 };
 
-export default MovieList;
+export default InfiniteMovieList;

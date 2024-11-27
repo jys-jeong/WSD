@@ -55,14 +55,22 @@
   background-color: black;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 400px) {
   .filter-bar {
-    flex-direction: column;
-    align-items: center;
+    padding: 10px; /* 패딩을 줄여서 작은 화면에 맞게 */
+    max-width: 100%; /* 너비를 화면에 맞게 설정 */
+    margin-top: 80px; /* 상단 여백 줄이기 */
   }
+
   .filter-bar select,
   .filter-bar button {
-    width: 100%;
-    margin-bottom: 10px;
+    width: 100%; /* 너비를 100%로 설정 */
+    font-size: 14px; /* 폰트 크기 줄이기 */
+    padding: 8px 12px; /* 패딩을 줄여서 작은 화면에 맞게 */
+  }
+
+  .filter-bar button {
+    font-size: 14px; /* 버튼 폰트 크기 줄이기 */
+    padding: 8px 12px; /* 버튼 패딩 줄이기 */
   }
 }

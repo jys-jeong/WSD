@@ -46,3 +46,9 @@
 .pagination button:hover {
   background-color: red; /* 호버 시 색 변경 */
 }
+.pagination button:active {
+  background-color: red; /* 호버 시 색 변경 */
+}
+.pagination button:focus-visible {
+  outline: 2px solid #ff4d4d; /* 터치 후 포커스 시 색상 지정 */
+}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FilterBar from "../components/search/Filter";
 import MovieList from "../components/search/InfiniteMovieList";
 import "../assets/styles/Filter.css";
-import "../assets/styles/FilterList.css";
+
 import Header from "../components/Header";
 const SearchPage: React.FC = () => {
   const [genre, setGenre] = useState<string | null>(null);

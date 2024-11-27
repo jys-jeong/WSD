@@ -4,20 +4,15 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   padding: 20px;
-  justify-items: center;
 }
 .movie-list::-webkit-scrollbar {
   display: none;
-}
-.movie-list > div {
-  justify-items: center;
 }
 /* 개별 영화 항목 */
 .movie-item {
   text-align: center;
   color: white;
   transition: transform 0.3s, box-shadow 0.3s;
-  justify-items: center;
 }
 
 /* 영화 포스터 */
@@ -42,19 +37,18 @@
 }
 .movie-title1 {
   font-size: 14px;
+  justify-self: center;
   margin: 0;
   font-weight: 600;
-  text-align: center;
 }
 .vote {
   display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
 }
 .votenum {
   margin: 0;
   font-size: 10px;
-  justify-items: center;
 }
 /* Infinite.css 파일에 스타일 추가 */
 .scroll-guide {
@@ -128,24 +122,22 @@
     grid-template-columns: 1fr; /* 한 열로 영화 항목 배치 */
     gap: 10px; /* 간격을 좁힘 */
     padding: 5px;
+    justify-items: center;
   }
 
   /* 영화 항목 */
   .movie-item {
     padding: 5px;
-    justify-items: center;
   }
 
   /* 영화 포스터 */
   .movie-item img {
     border-radius: 6px; /* 더 작은 모서리 반경 */
-    justify-items: center;
   }
 
   /* 영화 제목 */
   .movie-item p {
     font-size: 0.75rem; /* 글자 크기 더 작게 조정 */
-    justify-items: center;
   }
   .movie-overlay {
     display: none;

@@ -3,27 +3,32 @@ import { Link, useNavigate } from "react-router-dom";
 import "../assets/styles/Header.css";
 import { getFromStorage, removeFromStorage } from "../utils/localstorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilm, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFilm,
+  faRightFromBracket,
+  faHome,
+  faFire,
+  faSearch,
+  faHeart,
+} from "@fortawesome/free-solid-svg-icons"; // 추가 아이콘
 import { useAuth } from "../hooks/useAuth";
 import Toast from "./Auth/Toast";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const { signOut } = useAuth();
-  const [isScrolled, setIsScrolled] = useState(false); // 스크롤 여부 상태
-  const [email, setEmail] = useState<string | null>(null); // 사용자 이메일 상태
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [email, setEmail] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [toastType, setToastType] = useState<"success" | "error">("success");
 
   useEffect(() => {
-    // 사용자 이메일을 로컬스토리지에서 가져옴
     const storedEmail = getFromStorage("email");
     setEmail(storedEmail);
 
-    // 스크롤 이벤트 리스너 추가
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setIsScrolled(true); // 스크롤 50px 이상이면 배경 색 변경
+        setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
@@ -32,20 +37,18 @@ const Header: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll); // 컴포넌트 언마운트 시 이벤트 리스너 제거
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   const handleSignOut = async () => {
     signOut();
     removeFromStorage("TMDb-Key");
-    removeFromStorage("email"); // 로그아웃 시 이메일도 제거
+    removeFromStorage("email");
 
-    // Toast 메시지 설정
     setToastMessage("로그아웃되었습니다.");
     setToastType("success");
 
-    // 3초 후 Toast 메시지 초기화
     setTimeout(() => {
       setToastMessage(null);
     }, 3000);
@@ -56,28 +59,45 @@ const Header: React.FC = () => {
   return (
     <>
       <header className={`header show ${isScrolled ? "scrolled" : ""}`}>
-        <div className="header__logo"></div>
+        <div className="header__logo">
+          <FontAwesomeIcon icon={faFilm} size="2x" style={{ color: "red" }} />
+        </div>
         <nav className="header__nav">
           <Link to="/" className="header__navItem">
-            <FontAwesomeIcon icon={faFilm} size="2x" style={{ color: "red" }} />
-          </Link>
-          <Link to="/" className="header__navItem">
+            <FontAwesomeIcon
+              icon={faHome}
+              size="1x"
+              style={{ marginRight: "5px" }}
+            />
             홈
           </Link>
           <Link to="/popular" className="header__navItem">
+            <FontAwesomeIcon
+              icon={faFire}
+              size="1x"
+              style={{ marginRight: "5px" }}
+            />
             대세 콘텐츠
           </Link>
           <Link to="/search" className="header__navItem">
+            <FontAwesomeIcon
+              icon={faSearch}
+              size="1x"
+              style={{ marginRight: "5px" }}
+            />
             찾아보기
           </Link>
           <Link to="/wishlist" className="header__navItem">
+            <FontAwesomeIcon
+              icon={faHeart}
+              size="1x"
+              style={{ marginRight: "5px" }}
+            />
             내게 찜한 리스트
           </Link>
         </nav>
         <div className="header__profile">
-          {/* 사용자 이메일 표시 */}
           {email && <span className="header__email">{email}님</span>}
-          {/* 로그아웃 버튼 */}
           <button onClick={handleSignOut} className="header__profileButton">
             <FontAwesomeIcon
               icon={faRightFromBracket}
@@ -87,7 +107,6 @@ const Header: React.FC = () => {
           </button>
         </div>
       </header>
-      {/* Toast 메시지 렌더링 */}
       {toastMessage && <Toast message={toastMessage} type={toastType} />}
     </>
   );

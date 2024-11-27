@@ -61,3 +61,46 @@
   bottom: 0;
   width: 100%;
 }
+@media (max-width: 400px) {
+  .banner {
+    height: auto; /* 높이 자동 조정 */
+    padding: 40px 10px; /* 패딩 축소 */
+    margin: 72px 0;
+  }
+
+  .banner_contents {
+    margin-left: 10px; /* 좌측 여백 축소 */
+    text-align: left; /* 왼쪽 정렬 */
+  }
+
+  .banner_title {
+    font-size: 0.9rem; /* 제목 크기 더 작게 축소 */
+    font-weight: 700;
+    text-align: left; /* 왼쪽 정렬 */
+  }
+
+  .banner_description {
+    font-size: 0.7rem; /* 설명 글자 크기 더 작게 축소 */
+    line-height: 1.1; /* 줄 간격 축소 */
+    height: auto; /* 높이 자동 조정 */
+    text-align: left; /* 왼쪽 정렬 */
+    max-width: 100%; /* 너비 제한 해제 */
+    margin-top: 0.5rem; /* 간격 축소 */
+  }
+
+  .banner_buttons {
+    flex-direction: column; /* 버튼 세로 배치 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+    gap: 6px; /* 버튼 간격 축소 */
+    margin-left: 10px; /* 왼쪽 마진 추가 */
+  }
+
+  .banner_button {
+    font-size: 0.8rem; /* 버튼 글자 크기 축소 */
+    padding: 5px 14px; /* 버튼 패딩 축소 */
+  }
+
+  .banner--fadeBottom {
+    height: 4rem; /* 그라디언트 높이 축소 */
+  }
+}

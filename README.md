@@ -1,46 +1,79 @@
-# Getting Started with Create React App
+# [JYSCinema]()
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 프로젝트 설명
+JYSCinema는 TMDB API를 활용하여 영화 정보를 제공하고, 사용자가 영화를 검색하고 찜 목록에 영화를 추가하거나 삭제할 수 있는 React 기반 웹 애플리케이션입니다. 이 애플리케이션은 사용자에게 최신 영화 정보를 제공하고, 직관적인 UI를 통해 영화를 관리할 수 있는 기능을 제공합니다.
 
-## Available Scripts
+### 주요 기능
+- **회원가입 및 로그인**: 사용자가 계정을 생성하고 로그인할 수 있습니다.
+- **TMDB API를 활용한 영화 리스트 제공**: 최신 영화 목록을 TMDB API에서 가져와서 제공하며, 세부 정보를 확인할 수 있습니다.
+- **무한 스크롤 및 페이지네이션 지원**: 영화 목록을 무한 스크롤 또는 페이지네이션 방식으로 제공합니다.
+- **영화 필터링**: 장르, 개봉일, 평점 등을 기준으로 영화를 필터링할 수 있습니다.
+- **찜 목록 관리**: 사용자가 찜 목록에 영화를 추가하거나 삭제할 수 있습니다.
 
-In the project directory, you can run:
+### 기술 스택
+- **React.js**: 사용자 인터페이스를 구축하는 라이브러리
+- **FontAwesome**: UI 아이콘 제공
+- **TMDB API**: 영화 데이터를 가져오기 위한 외부 API
+- **React Router**: 애플리케이션 내 페이지 네비게이션을 처리하는 라이브러리
+- **CSS/SCSS**: 스타일링 및 레이아웃 구성
 
-### `npm start`
+### 설치 및 실행 방법
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. **레포지토리 클론**
+   먼저, 이 프로젝트를 로컬 환경으로 클론합니다.
+   ```bash
+   https://github.com/jys-jeong/WSD.git
+2. **패키지 설치**
+   ```bash
+   cd WSD
+   npm install
+3. **애플리케이션 실행**
+   ```bash
+   npm start
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 프로젝트 구조
+```bash
+   WSD/
+├── .github/workflows
+│   ├── deploy.yml
+├── public/
+│   ├── index.html
+│   └── ...
+├── src/
+│   ├── assets/styles
+│   │   ├── AuthForm.css
+│   │   ├── Banner.css
+│   │   ├── Auth/Filter.css
+│   │   └── ...
+│   ├── components/
+│   │   ├── Auth/
+│   │   ├── home/
+│   │   ├── popular/
+│   │   ├── search/
+│   │   ├── Header.tsx
+│   │   └── ...
+│   ├── hooks/
+│   │   ├── useAuth.tsx
+│   │   ├── useToast.tsx
+│   │   ├── useFetchMovies.tsx
+│   │   └── ...
+│   ├── pages/
+│   │   ├── Home.tsx
+│   │   ├── hompage.tsx
+│   │   ├── popular.tsx
+│   │   └── ...
+│   ├── types/
+│   │   └── Movie.d.ts
+│   ├── utils/vvvvvvvvvvvvv
+│   │   ├── URL.tsx
+│   │   ├── calculateLayout.tsx
+│   │   ├── localstorage.tsx
+│   │   └── ...
+│   ├── App.tsx
+│   ├── App.css
+│   ├── routes.tsx
+│   ├── index.tsx
+│   └── ...
+├── .env
+├── package.json
+└── README.md

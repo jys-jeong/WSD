@@ -141,7 +141,6 @@ form a:hover {
   }
 
   .auth-page {
-    height: auto;
     padding: 20px;
     overflow-x: hidden; /* 가로 스크롤을 방지 */
   }

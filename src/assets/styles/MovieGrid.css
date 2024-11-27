@@ -125,11 +125,6 @@ button {
   outline: none;
 }
 
-button:focus {
-  outline: 2px solid #007bff;
-  outline-offset: 2px;
-}
-
 /* 화면 회전 대응 */
 @media (orientation: landscape) {
   .movie-grid-container {

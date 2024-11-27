@@ -9,6 +9,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+
 interface MovieListProps {
   category: string;
   title: string;
@@ -24,13 +25,15 @@ const MovieList: React.FC<MovieListProps> = ({ category, title }) => {
 
   const scrollLeft = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: -800, behavior: "smooth" });
+      const scrollDistance = window.innerWidth <= 400 ? 260 : 800; // 화면 크기에 따라 scroll 거리 결정
+      sliderRef.current.scrollBy({ left: -scrollDistance, behavior: "smooth" });
     }
   };
 
   const scrollRight = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: 800, behavior: "smooth" });
+      const scrollDistance = window.innerWidth <= 400 ? 260 : 800; // 화면 크기에 따라 scroll 거리 결정
+      sliderRef.current.scrollBy({ left: scrollDistance, behavior: "smooth" });
     }
   };
 

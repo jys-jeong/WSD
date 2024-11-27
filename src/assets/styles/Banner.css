@@ -65,7 +65,8 @@
   .banner {
     height: auto; /* 높이 자동 조정 */
     padding: 40px 10px; /* 패딩 축소 */
-    margin: 72px 0;
+    margin: 0;
+    margin-top: 72px;
   }
 
   .banner_contents {

@@ -8,18 +8,22 @@
 
 body {
   margin-top: 0;
+  -webkit-overflow-scrolling: touch; /* iOS에서 부드러운 스크롤 지원 */
+  font-family: "Arial", sans-serif;
 }
 
 .auth-page {
   margin: 0;
   padding: 0;
-  font-family: "Arial", sans-serif;
   background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/4690cab8-243a-4552-baef-1fb415632f74/web/KR-ko-20241118-TRIFECTA-perspective_a7994636-03e5-4068-a16e-62a0ddc5a057_small.jpg");
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
 }
 
 .auth-page-wrapper {
@@ -65,8 +69,8 @@ form input[type="password"]::placeholder {
 
 form input[type="email"]:focus::placeholder,
 form input[type="password"]:focus::placeholder {
-  transform: translateX(-40px) translateY(-10px) scale(0.8); /* 애니메이션 효과 추가 */
-  font-size: 0.7rem; /* 글씨 작아지기 */
+  transform: translateX(-40px) translateY(-10px) scale(0.8);
+  font-size: 0.7rem;
 }
 
 form label {
@@ -80,6 +84,7 @@ form label {
 form label input[type="checkbox"] {
   margin-right: 8px;
 }
+
 form button {
   width: 100%;
   padding: 12px;
@@ -91,9 +96,11 @@ form button {
   transition: background-color 0.3s ease;
   margin-bottom: 10px;
 }
+
 form button[type="submit"] {
   background-color: var(--primary-red);
 }
+
 form button[type="button"] {
   background-color: var(--secondary-gray);
 }
@@ -110,53 +117,90 @@ form a:hover {
   text-decoration: underline;
 }
 
-/* form-container 애니메이션 (오른쪽에서 왼쪽으로 이동하고 크기 확대) */
+/* form-container 애니메이션 */
 .form-container {
   transition: opacity 0.5s ease, transform 0.5s ease;
   opacity: 0;
-  transform: translateX(100%) scale(0.8); /* 오른쪽에서 시작하고 크기를 축소 */
+  transform: translateX(100%) scale(0.8);
 }
 
 .form-container.visible {
   opacity: 1;
-  transform: translateX(0) scale(1); /* 왼쪽으로 이동하며 크기를 원래 크기로 확대 */
+  transform: translateX(0) scale(1);
 }
 
 .form-container.animating-out {
   opacity: 0;
-  transform: translateX(-100%) scale(0.8); /* 왼쪽으로 이동하며 크기를 축소 */
+  transform: translateX(-100%) scale(0.8);
 }
 
-@media (max-width: 768px) {
+/* 아이폰 15 Pro (266.8px x 554.07px) 화면 크기 대응 */
+@media (max-width: 380px) {
+  body {
+    font-size: 14px; /* 작은 화면에서 텍스트 크기 조정 */
+  }
+
+  .auth-page {
+    height: auto;
+    padding: 20px;
+    overflow-x: hidden; /* 가로 스크롤을 방지 */
+  }
+
+  .auth-page-wrapper {
+    max-width: 100%;
+    margin: 0 15px; /* 여백을 조금 더 주어 화면에 맞게 */
+  }
+
   form {
     padding: 20px;
-  }
-
-  form input {
-    font-size: 0.9rem;
-  }
-
-  form button {
-    font-size: 0.9rem;
-    padding: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  form {
-    padding: 15px;
-    margin: 20px auto;
+    margin: 10px 0;
+    box-sizing: border-box; /* 패딩 포함 너비 계산 */
   }
 
   form h2 {
     font-size: 1.5rem;
   }
 
-  form input {
-    font-size: 0.8rem;
+  form input[type="email"],
+  form input[type="password"] {
+    padding: 10px;
+    font-size: 0.9rem;
+    width: 100%; /* input 너비를 100%로 설정 */
+    box-sizing: border-box; /* 패딩 포함 너비 계산 */
   }
 
   form button {
+    font-size: 0.9rem;
+    padding: 10px;
+    width: 100%; /* 버튼 너비도 100%로 설정 */
+  }
+
+  form a {
     font-size: 0.8rem;
+  }
+}
+
+/* 화면 크기에 따라 더 작은 스타일 적용 */
+@media (max-width: 320px) {
+  form h2 {
+    font-size: 1.3rem;
+  }
+
+  form input[type="email"],
+  form input[type="password"] {
+    font-size: 0.85rem;
+    padding: 8px;
+    width: 100%; /* input 너비를 100%로 설정 */
+    box-sizing: border-box; /* 패딩 포함 너비 계산 */
+  }
+
+  form button {
+    font-size: 0.85rem;
+    padding: 8px;
+    width: 100%; /* 버튼 너비도 100%로 설정 */
+  }
+
+  form a {
+    font-size: 0.7rem;
   }
 }

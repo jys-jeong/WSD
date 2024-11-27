@@ -2,23 +2,28 @@
 .movie-list-container {
   margin: 0;
   width: 100%;
+  overflow: hidden;
 }
 
 .movie-grid-container {
   padding: 20px;
   box-sizing: border-box;
-  background-color: #f8f9fa; /* 배경 색 */
+  background-color: #f8f9fa;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-  overflow: hidden; /* 컨테이너 영역을 벗어난 콘텐츠 숨기기 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 /* 그리드 레이아웃 */
 .movie-grid {
   display: grid;
-  justify-content: center; /* 중앙 정렬 */
-  grid-auto-rows: auto; /* 행 높이는 콘텐츠에 맞게 조정 */
-  gap: 20px; /* 아이템 간격 */
+  justify-content: center;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(150px, 1fr)
+  ); /* 기본적으로 150px씩 크기를 조정 */
+  grid-auto-rows: auto;
+  gap: 15px;
 }
 
 /* 개별 영화 카드 스타일 */
@@ -35,25 +40,25 @@
 }
 
 .movie-item:hover {
-  transform: translateY(-5px); /* 호버 시 살짝 위로 이동 */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* 영화 포스터 스타일 */
 .movie-item img {
-  width: 200px; /* 고정 너비 */
-  height: 300px; /* 고정 높이 */
-  object-fit: cover; /* 이미지를 비율에 맞게 자름 */
-  border-bottom: 1px solid #dddddd; /* 구분선 추가 */
+  width: 180px;
+  height: 270px;
+  object-fit: cover;
+  border-bottom: 1px solid #dddddd;
 }
 
 /* 영화 제목 영역 */
 .movie-item-title {
-  font-size: 1rem;
-  padding: 10px;
+  font-size: 0.9rem;
+  padding: 8px;
   text-align: center;
   color: #333333;
-  background-color: #f0f0f0; /* 제목 영역 배경색 */
+  background-color: #f0f0f0;
 }
 
 /* 로딩 상태 텍스트 */
@@ -70,71 +75,49 @@
   margin-top: 20px;
 }
 
-/* 반응형 디자인 */
-@media (max-width: 1024px) {
-  .movie-grid-container {
-    padding: 15px;
+/* 400px 이하에서 변경될 스타일 */
+@media (max-width: 400px) {
+  /* 그리드 레이아웃 */
+  .movie-list-container {
+    width: 90%;
+    justify-self: center;
+  }
+  .movie-grid {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(100px, 1fr)
+    ); /* 영화 카드가 작은 화면에서 한 줄에 여러 개 나올 수 있도록 설정 */
+    gap: 10px;
+    justify-items: center;
   }
 
+  /* 개별 영화 카드 */
+  .movie-item {
+    width: 100%; /* 영화 카드가 화면 너비에 맞게 확장되도록 설정 */
+  }
+
+  /* 영화 포스터 */
   .movie-item img {
-    width: 180px;
-    height: 270px;
+    width: 100px; /* 포스터 크기를 더욱 줄이기 */
+    height: 150px;
   }
 
+  /* 영화 제목 */
   .movie-item-title {
-    font-size: 0.9rem;
+    font-size: 0.65rem; /* 제목 폰트 크기 줄이기 */
+    padding: 4px;
   }
 
+  /* 페이지네이션 버튼 */
   .pagination button {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-  }
-}
-
-@media (max-width: 768px) {
-  .movie-grid-container {
-    padding: 10px;
-  }
-
-  .movie-item img {
-    width: 160px;
-    height: 240px;
-  }
-
-  .movie-item-title {
-    font-size: 0.8rem;
-  }
-
-  .pagination button {
-    font-size: 0.8rem;
-    padding: 5px 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .movie-grid-container {
-    padding: 5px;
-  }
-
-  .movie-item img {
-    width: 140px;
-    height: 210px;
-  }
-
-  .movie-item-title {
-    font-size: 0.75rem;
-    padding: 8px;
-  }
-
-  .pagination button {
-    font-size: 0.8rem;
-    padding: 4px 8px;
+    font-size: 0.65rem;
+    padding: 3px 6px;
   }
 }
 
 /* 터치 이벤트 지원 */
 .movie-item:active {
-  transform: scale(0.95); /* 눌렀을 때 살짝 축소 */
+  transform: scale(0.95);
 }
 
 /* 접근성 향상 */
@@ -143,7 +126,7 @@ button {
 }
 
 button:focus {
-  outline: 2px solid #007bff; /* 포커스 표시 */
+  outline: 2px solid #007bff;
   outline-offset: 2px;
 }
 
@@ -165,6 +148,6 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   * {
-    transition: none !important; /* 모션 감소 설정 */
+    transition: none !important;
   }
 }

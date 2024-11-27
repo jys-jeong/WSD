@@ -85,7 +85,7 @@
   .movie-grid {
     grid-template-columns: repeat(
       auto-fill,
-      minmax(100px, 1fr)
+      minmax(120px, 1fr)
     ); /* 영화 카드가 작은 화면에서 한 줄에 여러 개 나올 수 있도록 설정 */
     gap: 10px;
     justify-items: center;
@@ -98,8 +98,8 @@
 
   /* 영화 포스터 */
   .movie-item img {
-    width: 100px; /* 포스터 크기를 더욱 줄이기 */
-    height: 150px;
+    width: 120px; /* 포스터 크기를 더욱 줄이기 */
+    height: 200px;
   }
 
   /* 영화 제목 */

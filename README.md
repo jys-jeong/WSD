@@ -20,7 +20,6 @@ JYSCinema는 TMDB API를 활용하여 영화 정보를 제공하고, 사용자�
 ### 설치 및 실행 방법
 
 1. **레포지토리 클론**
-   먼저, 이 프로젝트를 로컬 환경으로 클론합니다.
    ```bash
    https://github.com/jys-jeong/WSD.git
 2. **패키지 설치**

@@ -4,6 +4,7 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   padding: 20px;
+  justify-items: center;
 }
 .movie-list::-webkit-scrollbar {
   display: none;
@@ -48,10 +49,12 @@
 .vote {
   display: flex;
   align-items: center;
+  justify-items: center;
 }
 .votenum {
   margin: 0;
   font-size: 10px;
+  justify-items: center;
 }
 /* Infinite.css 파일에 스타일 추가 */
 .scroll-guide {

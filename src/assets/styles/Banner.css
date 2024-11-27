@@ -59,14 +59,14 @@
   );
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: auto;
 }
 @media (max-width: 400px) {
   .banner {
     height: auto; /* 높이 자동 조정 */
     padding: 40px 10px; /* 패딩 축소 */
     margin: 0;
-    margin-top: 72px;
+    margin-top: 65px;
   }
 
   .banner_contents {

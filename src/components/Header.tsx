@@ -59,10 +59,15 @@ const Header: React.FC = () => {
   return (
     <>
       <header className={`header show ${isScrolled ? "scrolled" : ""}`}>
-        <div className="header__logo">
-          <FontAwesomeIcon icon={faFilm} size="2x" style={{ color: "red" }} />
-        </div>
+        <div className="header__logo"></div>
         <nav className="header__nav">
+          <Link to="/" className="header__navItem">
+            <FontAwesomeIcon
+              icon={faFilm}
+              size="2x"
+              style={{ color: "red", display: "block" }}
+            />
+          </Link>
           <Link to="/" className="header__navItem">
             <FontAwesomeIcon
               icon={faHome}

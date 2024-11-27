@@ -142,7 +142,6 @@
   .movie-list-container {
     width: 100%; /* 화면에 꽉 차게 설정 */
     margin: 10px auto;
-    padding: 0 10px; /* 좌우 여백 추가 */
   }
 
   .movie-list-container h2 {

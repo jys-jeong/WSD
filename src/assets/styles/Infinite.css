@@ -16,6 +16,7 @@
   text-align: center;
   color: white;
   transition: transform 0.3s, box-shadow 0.3s;
+  justify-items: center;
 }
 
 /* 영화 포스터 */

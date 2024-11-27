@@ -8,7 +8,7 @@
 .movie-list::-webkit-scrollbar {
   display: none;
 }
-.movie-list div {
+.movie-list > div {
   justify-items: center;
 }
 /* 개별 영화 항목 */
@@ -42,6 +42,7 @@
   font-size: 14px;
   margin: 0;
   font-weight: 600;
+  text-align: center;
 }
 .vote {
   display: flex;

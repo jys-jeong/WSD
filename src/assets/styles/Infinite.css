@@ -140,6 +140,7 @@
   /* 영화 제목 */
   .movie-item p {
     font-size: 0.75rem; /* 글자 크기 더 작게 조정 */
+    justify-content: center;
   }
   .movie-overlay {
     display: none;

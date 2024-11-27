@@ -135,7 +135,7 @@ form a:hover {
 }
 
 /* 아이폰 15 Pro (266.8px x 554.07px) 화면 크기 대응 */
-@media (max-width: 380px) {
+@media (max-width: 400px) {
   body {
     font-size: 14px; /* 작은 화면에서 텍스트 크기 조정 */
   }

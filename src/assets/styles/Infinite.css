@@ -8,6 +8,7 @@
 .movie-list::-webkit-scrollbar {
   display: none;
 }
+
 /* 개별 영화 항목 */
 .movie-item {
   text-align: center;
@@ -40,6 +41,7 @@
   justify-self: center;
   margin: 0;
   font-weight: 600;
+  text-align: center;
 }
 .vote {
   display: flex;
@@ -124,7 +126,9 @@
     padding: 5px;
     justify-items: center;
   }
-
+  .movie-list > div {
+    max-width: 130px;
+  }
   /* 영화 항목 */
   .movie-item {
     padding: 5px;

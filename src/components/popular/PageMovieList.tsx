@@ -67,6 +67,14 @@ const PageMovieList: React.FC = () => {
   useEffect(() => {
     setLoading(true);
     fetchMovies(currentPage).finally(() => setLoading(false));
+
+    // body에 overflow: hidden 적용
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      // 컴포넌트가 언마운트될 때 overflow 스타일 초기화
+      document.body.style.overflow = "";
+    };
   }, [currentPage]);
 
   return (

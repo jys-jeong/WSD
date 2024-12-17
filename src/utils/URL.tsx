@@ -6,7 +6,7 @@ const getAPIKey = async () => {
   return key;
 };
 
-const BASE_URL = process.env.REACT_APP_TMDB_API_URL;
+const BASE_URL = "https://api.themoviedb.org/3";
 const lang = process.env.REACT_APP_DEFAULT_LANGUAGE;
 
 export class TMDB {

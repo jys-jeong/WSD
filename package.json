@@ -1,5 +1,5 @@
 {
-  "homepage": "https://jys-jeong.github.io/WSD",
+  "homepage": "/WSD",
   "name": "wsd-assignment-02",
   "version": "0.1.0",
   "private": true,
@@ -33,8 +33,8 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "cross-env REACT_APP_ENV=development react-scripts start",
-    "build": "cross-env REACT_APP_ENV=production react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -35,7 +35,6 @@ jobs:
       - name: npm install and build
         run: |
           npm install
-          export REACT_APP_ENV=production
           npm run build
 
       - name: Deploy to gh-pages

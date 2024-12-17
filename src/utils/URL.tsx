@@ -82,7 +82,7 @@ export class TMDB {
       const response = await axios.get(
         `${BASE_URL}/discover/movie?include_adult=false&include_video=false&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte={min_date}&release_date.lte={max_date}`,
         {
-          params: { api_key: API_KEY, language: "ko-KR", page: 3 },
+          params: { api_key: API_KEY, language: lang, page: 3 },
         }
       );
       return response.data.results;
